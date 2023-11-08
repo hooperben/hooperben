@@ -1,0 +1,90 @@
+/* Reset margins, paddings, and borders */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+/* Set default box-sizing to border-box */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* Remove default styling for lists */
+ol,
+ul {
+  list-style: none;
+}
+
+/* Make images and embedded elements block-level and responsive */
+img,
+video,
+canvas,
+audio,
+iframe,
+embed,
+object {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+/* Reset table styles */
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+/* Reset form element styles */
+input,
+button,
+textarea,
+select {
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  outline: none;
+  vertical-align: middle;
+}
+
+/* Reset anchor tag styles */
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* Apply a consistent box model */
+html {
+  box-sizing: border-box;
+  background-color: "#f5e1c4";
+  background: "#f5e1c4";
+}
+
+/* Reset body styling */
+body {
+  line-height: 1;
+  font-size: 100%;
+  font-family: "Open Sans", Arial, Helvetica, sans-serif;
+}
+
+/* Reset headings for more consistent font sizing */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-size: 100%;
+  font-weight: normal;
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
