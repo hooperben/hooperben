@@ -1,4 +1,5 @@
 import Head from "next/head";
+import Body from "next/head";
 import Link from "next/link";
 import React, { ReactNode } from "react";
 
@@ -19,22 +20,35 @@ const Layout = ({ children, title = "TODO add default title" }: Props) => (
       <meta name="viewport" content="initial-scale=1.0, width=device-width" />
     </Head>
     <Navigation />
-    <div className="flex p-20">{children}</div>
+
+    <div className="flex p-5 pt-20 md:p-20 md:pt-20">{children}</div>
 
     <footer className="fixed bottom-5 right-5">
       <div className="flex justify-end bottom-0">
         <div className="flex flex-row">
-          <Link href="https://github.com/hooperben">
+          <a
+            href="https://github.com/hooperben"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             <Github />
-          </Link>
+          </a>
 
-          <Link href="https://twitter.com/0xbenhooper">
+          <a
+            href="https://twitter.com/0xbenhooper"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             <Twitter />
-          </Link>
+          </a>
 
-          <Link href="https://www.linkedin.com/in/ben-hooper21">
+          <a
+            href="https://www.linkedin.com/in/ben-hooper21"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             <LinkedIn />
-          </Link>
+          </a>
         </div>
       </div>
     </footer>

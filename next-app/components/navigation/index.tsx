@@ -122,7 +122,7 @@ const Navigation = () => {
         <div
           className={`md:hidden ${
             showMenu ? "block" : "hidden"
-          } bg-lightCream dark:bg-lightBlack fixed w-full z-10 top-10`}
+          } bg-lightCream dark:bg-lightBlack fixed w-full z-10 top-10 h-screen`}
         >
           <Menu isFlexCol />
         </div>
