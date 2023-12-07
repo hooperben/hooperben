@@ -1,6 +1,4 @@
 import Head from "next/head";
-import Body from "next/head";
-import Link from "next/link";
 import React, { ReactNode } from "react";
 
 import { Github, LinkedIn, Twitter } from "../components/socials";
@@ -12,7 +10,7 @@ type Props = {
 };
 
 const Layout = ({ children, title = "TODO add default title" }: Props) => (
-  <div className="bg-darkCream dark:bg-black h-screen w-screen">
+  <div className="bg-darkCream dark:bg-black h-100 w-100%">
     <Head>
       <title>{title}</title>
       <link rel="shortcut icon" href="favicon.ico" />

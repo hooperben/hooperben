@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 /* Reset margins, paddings, and borders */
 *,
 *::before,
@@ -72,6 +76,8 @@ body {
   line-height: 1;
   font-size: 100%;
   font-family: "Open Sans", Arial, Helvetica, sans-serif;
+
+  @apply bg-darkCream dark:bg-black;
 }
 
 /* Reset headings for more consistent font sizing */
@@ -84,7 +90,3 @@ h6 {
   font-size: 100%;
   font-weight: normal;
 }
-
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
