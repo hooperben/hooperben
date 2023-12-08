@@ -7,9 +7,14 @@ import Navigation from "./navigation";
 type Props = {
   children?: ReactNode;
   title?: string;
+  isContact?: boolean;
 };
 
-const Layout = ({ children, title = "TODO add default title" }: Props) => (
+const Layout = ({
+  children,
+  title = "TODO add default title",
+  isContact,
+}: Props) => (
   <div className="bg-darkCream dark:bg-black h-100 w-100%">
     <Head>
       <title>{title}</title>
@@ -21,8 +26,12 @@ const Layout = ({ children, title = "TODO add default title" }: Props) => (
 
     <div className="flex p-5 pt-20 md:p-20 md:pt-20">{children}</div>
 
-    <footer className="fixed bottom-5 right-5">
+    <footer className="hidden md:block fixed bottom-5 right-5">
       <div className="flex justify-end bottom-0">
+        {isContact && (
+          <p className="text-black dark:text-darkCream">down here too! handy</p>
+        )}
+
         <div className="flex flex-row">
           <a
             href="https://github.com/hooperben"

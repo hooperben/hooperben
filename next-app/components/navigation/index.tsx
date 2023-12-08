@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
 
+import { Github, LinkedIn, Twitter } from "../../components/socials";
 import useDarkModeStore from "../../stores/dark-mode-store";
+
 import { Sun } from "../design/sun";
 import { Moon } from "../design/moon";
 
@@ -16,10 +18,38 @@ const NavItem = ({ path, title }: { path: string; title: string }) => (
 
 const Menu = ({ isFlexCol = false }: { isFlexCol?: boolean }) => (
   <div className={isFlexCol ? "flex flex-col" : ""}>
-    <NavItem path="/" title="home"></NavItem>
-    <NavItem path="/about" title="about" />
-    <NavItem path="/ramblings" title="ramblings" />
-    <NavItem path="/contact" title="contact" />
+    <div className={isFlexCol ? "flex flex-col" : ""}>
+      <NavItem path="/" title="home"></NavItem>
+      <NavItem path="/about" title="about" />
+      <NavItem path="/ramblings" title="ramblings" />
+      <NavItem path="/contact" title="contact" />
+    </div>
+
+    <div className="flex flex-row fixed bottom-5 right-5">
+      <a
+        href="https://github.com/hooperben"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <Github />
+      </a>
+
+      <a
+        href="https://twitter.com/0xbenhooper"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <Twitter />
+      </a>
+
+      <a
+        href="https://www.linkedin.com/in/ben-hooper21"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <LinkedIn />
+      </a>
+    </div>
   </div>
 );
 
