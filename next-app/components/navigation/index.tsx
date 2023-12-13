@@ -10,7 +10,7 @@ import { Moon } from "../design/moon";
 const NavItem = ({ path, title }: { path: string; title: string }) => (
   <Link
     href={path}
-    className="py-4 px-2 text-black dark:text-darkCream font-semibold hover:text-lightBlack dark:hover:text-lightCream"
+    className="px-2 mt-1 align-center text-black dark:text-darkCream font-semibold hover:text-lightBlack dark:hover:text-lightCream"
   >
     {title}
   </Link>
@@ -18,8 +18,8 @@ const NavItem = ({ path, title }: { path: string; title: string }) => (
 
 const Menu = ({ isFlexCol = false }: { isFlexCol?: boolean }) => (
   <div className={isFlexCol ? "flex flex-col" : ""}>
-    <div className={isFlexCol ? "flex flex-col" : ""}>
-      <NavItem path="/" title="home"></NavItem>
+    <div className={`${isFlexCol ? "flex flex-col" : "flex"} align-center`}>
+      <NavItem path="/" title="home" />
       <NavItem path="/about" title="about" />
       <NavItem path="/ramblings" title="ramblings" />
       <NavItem path="/contact" title="contact" />
