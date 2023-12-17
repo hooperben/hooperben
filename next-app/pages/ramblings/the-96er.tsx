@@ -160,6 +160,7 @@ const markdown = [
 
 We raced all 96 races available in Mario Kart 8 - here are the results (they might shock you):
 
+**Race Set Up**: 2 x 48 race multiplayer grand prix with Tracks in order. 200cc, Frantic Items, Hard CPU (the Mob).
 `,
   `
 ## 96er Closing Thoughts
