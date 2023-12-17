@@ -120,16 +120,16 @@ const ResultsTable = () => (
     <table className="w-full text-sm text-left">
       <thead className="text-xs uppercase dark:text-darkCream">
         <tr>
-          <th scope="col" className="py-3 px-6">
+          <th scope="col" className="py-3">
             Race
           </th>
-          <th scope="col" className="py-3 px-6">
+          <th scope="col" className="py-3 pl-6">
             Track
           </th>
-          <th scope="col" className="py-3 px-6">
+          <th scope="col" className="py-3 pl-6">
             Winner
           </th>
-          <th scope="col" className="py-3 px-6">
+          <th scope="col" className="py-3 ">
             Insights
           </th>
         </tr>
@@ -137,7 +137,7 @@ const ResultsTable = () => (
       <tbody>
         {results.map((result, index) => (
           <tr key={index}>
-            <td className="py-4 px-6 text-center">{index + 1}</td>
+            <td className="py-4 text-center">{index + 1}</td>
             <td className="py-4 px-6">{result.track}</td>
             <td className="py-4 px-6">{result.winner}</td>
             {result.insights && (
@@ -176,13 +176,17 @@ const IndividualRamble = () => {
   return (
     <Layout title={`The 96er | hooper.link`}>
       <div className="flex flex-col">
-        <img src="/the-96er.png" alt="The 96er" className="pb-5" width="600" />
+        <img
+          src="/the-96er.png"
+          alt="The 96er"
+          className="pb-5 w-full xs:w-3/4 md:w-3/4"
+        />
         <div className="prose dark:prose-invert text-black dark:text-darkCream dark:prose-strong:text-darkCream dark:prose-h1:text-darkCream dark:prose-h2:text-darkCream dark:prose-h3:text-darkCream dark:prose-h4:text-darkCream dark:prose-h5:text-darkCream dark:prose-h6:text-darkCream">
           <Markdown remarkPlugins={[remarkMath]} rehypePlugins={[rehypeKatex]}>
             {markdown[0]}
           </Markdown>
 
-          <div className="flex flex-col justify-center w-full text-black dark:text-darkCream">
+          <div className="flex flex-col text-black dark:text-darkCream">
             <ResultsTable />
           </div>
 
