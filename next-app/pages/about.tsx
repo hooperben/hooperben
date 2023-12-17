@@ -16,13 +16,15 @@ const sections = [
   I am currently a Full Stack Engineer $$ (hacker_man) $$, who is most interested in blockchain and distributed computer systems. There's
   a few areas of blockchain, and lately I am most interested in zero knowledge proofs and their applications.
 
+  Below is a compiled list of flexes I can do, and some of my experiences flexing said flex.
+
   ### Front End / Interfaces (The thing you use that doesn't look like a command line)
 
-  I am most comfortable with react but lately that has taken form in the shape of next.js. 
-  I have also used vue.js, and angular.js in the past, but I am not as comfortable with them.
-  I can make a front end look decent enough (this site is built with react/nextjs with the
+  I am most comfortable with react but lately that has taken form in the shape of next. 
+  I have also used vue and angular in the past, but I am not as comfortable with them.
+  I can make a front end look decent enough (this site is built with react/next with the
   tailwindcss library, with markdown text for big blocks of text like you're currently reading),
-  but front end isn't quite my forte (pronounced for tay).
+  but front end isn't quite my forte (for-tay).
 
   I am interested in getting better at wasm, and have been playing around with rust and web assembly.
 `,
