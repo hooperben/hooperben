@@ -179,7 +179,7 @@ const IndividualRamble = () => {
     <Layout title={`The 96er | hooper.link`}>
       <Head>
         {/* Title of the page */}
-        <title>My Custom Title for the Article</title>
+        <title>The 96er</title>
 
         {/* Open Graph / Facebook Meta Tags */}
         <meta
