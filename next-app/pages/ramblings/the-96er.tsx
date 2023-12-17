@@ -3,6 +3,7 @@ import Layout from "../../components/Layout";
 import remarkMath from "remark-math";
 import rehypeKatex from "rehype-katex";
 import "katex/dist/katex.min.css";
+import Head from "next/head";
 
 const results = [
   { track: "Mario Kart Stadium", winner: "Gabba" },
@@ -175,6 +176,37 @@ We raced all 96 races available in Mario Kart 8 - here are the results (they mig
 const IndividualRamble = () => {
   return (
     <Layout title={`The 96er | hooper.link`}>
+      <Head>
+        {/* Title of the page */}
+        <title>My Custom Title for the Article</title>
+
+        {/* Open Graph / Facebook Meta Tags */}
+        <meta
+          property="og:url"
+          content="https://hooper.link/ramblings/the-96er"
+        />
+        <meta property="og:type" content="article" />
+        <meta property="og:title" content="The 96er" />
+        <meta
+          property="og:description"
+          content="We raced 96 mario cart races"
+        />
+        <meta property="og:image" content="https://hooper.link/the-96er.png" />
+
+        {/* Twitter Card Meta Tags */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:domain" content="mysite.com" />
+        <meta
+          name="twitter:url"
+          content="https://hooper.link/ramblings/the-96er"
+        />
+        <meta name="twitter:title" content="The 96er" />
+        <meta
+          name="twitter:description"
+          content="We raced 96 mario cart races"
+        />
+        <meta name="twitter:image" content="https://hooper.link/the-96er.png" />
+      </Head>
       <div className="flex flex-col">
         <img
           src="/the-96er.png"
