@@ -7,10 +7,22 @@ import useDarkModeStore from "../../stores/dark-mode-store";
 import { Sun } from "../design/sun";
 import { Moon } from "../design/moon";
 
-const NavItem = ({ path, title }: { path: string; title: string }) => (
+const NavItem = ({
+  path,
+  title,
+  isFlexCol,
+}: {
+  path: string;
+  title: string;
+  isFlexCol?: boolean;
+}) => (
   <Link
     href={path}
-    className="px-2 mt-1 align-center text-black dark:text-darkCream font-semibold hover:text-lightBlack dark:hover:text-lightCream"
+    className={
+      isFlexCol
+        ? "text-2xl ml-5 py-8 text-black dark:text-darkCream font-semibold hover:text-lightBlack dark:hover:text-lightCream"
+        : "px-2 mt-1 align-center text-black dark:text-darkCream font-semibold hover:text-lightBlack dark:hover:text-lightCream"
+    }
   >
     {title}
   </Link>
@@ -19,10 +31,11 @@ const NavItem = ({ path, title }: { path: string; title: string }) => (
 const Menu = ({ isFlexCol = false }: { isFlexCol?: boolean }) => (
   <div className={isFlexCol ? "flex flex-col" : ""}>
     <div className={`${isFlexCol ? "flex flex-col" : "flex"} align-center`}>
-      <NavItem path="/" title="home" />
-      <NavItem path="/about" title="about" />
-      <NavItem path="/ramblings" title="ramblings" />
-      <NavItem path="/contact" title="contact" />
+      {/* isFlexCol is a bit gross but oh well */}
+      <NavItem path="/" title="home" isFlexCol={isFlexCol} />
+      <NavItem path="/about" title="about" isFlexCol={isFlexCol} />
+      <NavItem path="/ramblings" title="ramblings" isFlexCol={isFlexCol} />
+      <NavItem path="/contact" title="contact" isFlexCol={isFlexCol} />
     </div>
 
     <div className="flex flex-row fixed bottom-5 right-5">
