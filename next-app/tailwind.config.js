@@ -10,6 +10,13 @@ module.exports = {
   ],
   theme: {
     extend: {
+      typography: (theme) => ({
+        DEFAULT: {
+          css: {
+            fontSize: "12px",
+          },
+        },
+      }),
       colors: {
         black: "#131415",
         blue: "#0a84ff",

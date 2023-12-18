@@ -117,20 +117,20 @@ const results = [
 ];
 
 const ResultsTable = () => (
-  <div className="overflow-x-auto relative">
-    <table className="w-full text-sm text-left">
-      <thead className="text-xs uppercase dark:text-darkCream">
+  <div className="" style={{ width: "90%" }}>
+    <table className="text-xs text-left">
+      <thead className="uppercase dark:text-darkCream">
         <tr>
           <th scope="col" className="py-3">
             Race
           </th>
-          <th scope="col" className="py-3 pl-6">
+          <th scope="col" className="py-3 pl-1">
             Track
           </th>
-          <th scope="col" className="py-3 pl-6">
+          <th scope="col" className="py-3 pl-1">
             Winner
           </th>
-          <th scope="col" className="py-3 ">
+          <th scope="col" className="py-3">
             Insights
           </th>
         </tr>
@@ -139,11 +139,9 @@ const ResultsTable = () => (
         {results.map((result, index) => (
           <tr key={index}>
             <td className="py-4 text-center">{index + 1}</td>
-            <td className="py-4 px-6">{result.track}</td>
-            <td className="py-4 px-6">{result.winner}</td>
-            {result.insights && (
-              <td className="py-4 px-6">{result.insights}</td>
-            )}
+            <td className="py-4 pl-1">{result.track}</td>
+            <td className="py-4 pl-1">{result.winner}</td>
+            {result.insights && <td className="py-4">{result.insights}</td>}
           </tr>
         ))}
       </tbody>
@@ -208,13 +206,13 @@ const IndividualRamble = () => {
         />
         <meta name="twitter:image" content="https://hooper.link/the-96er.png" />
       </Head>
-      <div className="flex flex-col">
+      <div className="flex flex-col w-full">
         <img
           src="/the-96er.png"
           alt="The 96er"
-          className="pb-5 w-full xs:w-3/4 md:w-3/4"
+          className="pb-5 w-full xs:w-3/4 md:w-3/4 max-w-lg"
         />
-        <div className="prose dark:prose-invert text-black dark:text-darkCream dark:prose-strong:text-darkCream dark:prose-h1:text-darkCream dark:prose-h2:text-darkCream dark:prose-h3:text-darkCream dark:prose-h4:text-darkCream dark:prose-h5:text-darkCream dark:prose-h6:text-darkCream">
+        <div className="max-w-full w-full prose dark:prose-invert text-black dark:text-darkCream dark:prose-strong:text-darkCream dark:prose-h1:text-darkCream dark:prose-h2:text-darkCream dark:prose-h3:text-darkCream dark:prose-h4:text-darkCream dark:prose-h5:text-darkCream dark:prose-h6:text-darkCream">
           <Markdown remarkPlugins={[remarkMath]} rehypePlugins={[rehypeKatex]}>
             {markdown[0]}
           </Markdown>
