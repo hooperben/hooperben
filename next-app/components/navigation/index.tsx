@@ -75,10 +75,7 @@ const Navigation = () => {
   // toggle the dark mode in state and on the document
   const onDarkModeIconClick = () => {
     document.documentElement.classList.toggle("dark");
-    if (
-      window.matchMedia("(prefers-color-scheme: dark)").matches &&
-      !darkMode
-    ) {
+    if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
       toggleDarkMode();
     }
   };
