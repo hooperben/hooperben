@@ -1,4 +1,3 @@
-const width = 8;
 const TheCave = () => (
   <div className="w-12">
     <svg
