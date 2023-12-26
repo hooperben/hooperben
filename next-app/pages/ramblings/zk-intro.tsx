@@ -4,6 +4,7 @@ import remarkMath from "remark-math";
 import rehypeKatex from "rehype-katex";
 import "katex/dist/katex.min.css";
 import Head from "next/head";
+import TheCave from "../../components/animations/the-cave";
 
 const markdown = [
   `
@@ -19,8 +20,8 @@ I think that the best example to demonstrate what a zero knowledge proof is 'The
 
 Say you have a donut shaped cave like so:
 
-<TODO_CAVE_IMAGE>
-
+`,
+  `
 The entrance and exit are the same.
 
 On the opposite side to the entrance of the cave is a magic door - that requires a password to open and pass through.
@@ -131,6 +132,10 @@ const IndividualRamble = () => {
         <div className="prose dark:prose-invert text-black dark:text-darkCream dark:prose-strong:text-darkCream dark:prose-h1:text-darkCream dark:prose-h2:text-darkCream dark:prose-h3:text-darkCream dark:prose-h4:text-darkCream dark:prose-h5:text-darkCream dark:prose-h6:text-darkCream">
           <Markdown remarkPlugins={[remarkMath]} rehypePlugins={[rehypeKatex]}>
             {markdown[0]}
+          </Markdown>
+          <TheCave />
+          <Markdown remarkPlugins={[remarkMath]} rehypePlugins={[rehypeKatex]}>
+            {markdown[1]}
           </Markdown>
         </div>
       </div>
