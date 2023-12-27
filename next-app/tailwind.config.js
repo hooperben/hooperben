@@ -28,6 +28,12 @@ module.exports = {
         lightShadow: "0 4px 3px -1px rgba(245, 245, 220, 0.4)", // For light mode
         darkShadow: "0 4px 3px -1px rgba(0, 0, 0, 0.4)", // For dark mode
       },
+      borderWidth: {
+        diagram: "1px",
+      },
+      borderRadius: {
+        diagram: "14px",
+      },
       screens: {
         xs: "320px",
         sm: "640px",
