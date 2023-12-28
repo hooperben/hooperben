@@ -26,9 +26,11 @@ Notice that the entrance and exit are the same, and on the opposite side to the 
 Say you want to prove to someone that you know what the password to this magic door is, but you do not want to reveal to them what the password is.
 
 If you can go down one side of the cave, and come out of the other - to anyone observing who knows the layout of the cave, this is pretty conclusive evidence that you know the magic password.
-
-If you go down one side, and come back out of that same side, it's pretty conclusive evidence that you do not know the magic password.
-
+`,
+  `
+If you go down one side, and come back out of that same side, it's pretty conclusive evidence that you do not know the magic password (or like maybe you don't wanna prove you know it - you do you).
+`,
+  `
 In this model, an observer can verify that you know something, without knowing what it is that you know. 
 
 This is a pretty cool little thought experiment, but how is this useful? Well, the ability to prove information without revealing it has quite a lot of theoretical applications in the real world.
@@ -49,9 +51,11 @@ Polynomials are an area of mathematics that is pretty enormous, but I'm not too 
 
 $$ f(x) = 5x^2 + 2y - 7 $$
 
-In this article, we are going to be using a model called PLONK (Permutations over Lagrange-bases for Oecumenical Noninteractive arguments of Knowledge - quite a mouthful), to generate build a zero knowledge proof system using properties of polynomials that have been found over the years.
+In this article, we are going to be using a model called PLONK (Permutations over Lagrange-bases for Oecumenical Noninteractive arguments of Knowledge - quite a mouthful), to generate/build a zero knowledge 
+proof system using properties of polynomials that have been found over the years.
 
-PLONK was first proposed in a paper by Ariel Gabizon, Zachary J. Williamson, and Oana Ciobotaru. That paper is what I'll be trying to unmathesize a bit with the following explanation.
+PLONK was first proposed in a paper by Ariel Gabizon, Zachary J. Williamson, and Oana Ciobotaru.
+That paper is what I'll be trying to unmathesize a bit with the following explanation.
 
 So, let's start by replacing our cave example with the following function:
 
@@ -74,7 +78,7 @@ the above statement, $$ f(x) = x * (x - 1) = 420 $$, can actually be expressed a
 `,
   `
 These kind of logic gates are everywhere in computer science/electrical engineering,
-and you are currently using billions (if not trillions) of them every single day - pretty cool.
+and you are currently using billions (if not trillions) of them right now.
 
 
 But, our circuit isn't too complex, and only has 2 gates and 2 constraints (hover/click to view):
@@ -86,11 +90,11 @@ But, our circuit isn't too complex, and only has 2 gates and 2 constraints (hove
 
 if all of these conditions are true, then our circuit passes.
 
-in PLONK, we express conditions constraints like this:
+in PLONK, we express conditions constraints in the form:
 
 $$ Q_La + Q_Rb + Q_OC + Q_Mab + Q_C = 0 $$
 
-This looks daunting, but let me explain.
+where:
 
 - $$ Q_L $$ = the left input wire
 - $$ Q_R $$ = the right input wire
@@ -100,7 +104,7 @@ This looks daunting, but let me explain.
 
 All $$ Q $$s are constant, and the entire gate can be configured by changing the Q value.
 
-So in PLONK, we express our addition gates as: 
+
 `,
 ];
 
@@ -119,9 +123,16 @@ const IndividualRamble = () => {
         <div className="prose dark:prose-invert text-black dark:text-darkCream dark:prose-strong:text-darkCream dark:prose-h1:text-darkCream dark:prose-h2:text-darkCream dark:prose-h3:text-darkCream dark:prose-h4:text-darkCream dark:prose-h5:text-darkCream dark:prose-h6:text-darkCream">
           <MarkdownWithMaths>{markdown[0]}</MarkdownWithMaths>
           <TheCave />
+          {/* <TheCave incorrect /> */}
+
           <MarkdownWithMaths>{markdown[1]}</MarkdownWithMaths>
-          <FullCircuit />
+          <TheCave isValid />
           <MarkdownWithMaths>{markdown[2]}</MarkdownWithMaths>
+          <TheCave incorrect />
+          <MarkdownWithMaths>{markdown[3]}</MarkdownWithMaths>
+
+          <FullCircuit />
+          <MarkdownWithMaths>{markdown[4]}</MarkdownWithMaths>
           <PLONKAndGate />
         </div>
       </div>
