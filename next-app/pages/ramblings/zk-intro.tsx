@@ -1,5 +1,9 @@
 import Layout from "../../components/Layout";
-import { FullCircuit, PLONKAndGate } from "../../components/animations/gates";
+import {
+  FullCircuit,
+  PLONKAndGate,
+  PLONKOrGate,
+} from "../../components/animations/gates";
 import TheCave from "../../components/animations/the-cave";
 import MarkdownWithMaths from "../../components/markdown/markdown-with-maths";
 
@@ -13,15 +17,16 @@ this post is based on a talk I gave at work ~2 months ago, and is an introductio
 
 **disclaimer:** as you'll soon see, this can get pretty abstract and mathsy. I am someone interested in mathematics and software - but I am by no means a mathematician (I bench way too much). If you see something egregiously incorrect, please let me know.
 
-From the top: A zero knowledge proof is a system in which can you can prove information is true, without revealing the information itself. This is a pretty abstract concept, so lets look at some examples.
+From the top: A zero knowledge proof is a system in which can you can prove information is true, without revealing the information itself.
+ This is a pretty abstract concept, so lets look at an example.
 
 I think that the best example to demonstrate what a zero knowledge proof is 'The Cave'.
 
-Say you have a donut shaped cave like so:
+Say you have a donut shaped cave like so (top-down view):
 
 `,
   `
-Notice that the entrance and exit are the same, and on the opposite side to the entrance of the cave is a magic door (that brown line) - that requires a password to open and pass through.
+Notice that the entrance and exit are the same, and on the opposite side to the entrance of the cave is a magic door (that brown/red line) - that requires a password to open and pass through.
 
 Say you want to prove to someone that you know what the password to this magic door is, but you do not want to reveal to them what the password is.
 
@@ -102,7 +107,22 @@ where:
 - $$ Q_M $$ = the multiplication gate
 - $$ Q_C $$ = the constant
 
-All $$ Q $$s are constant, and the entire gate can be configured by changing the Q value.
+All $$ Q $$s are constant, and the entire gate can be configured by changing the $$ Q $$ value.
+
+In the PLONK paper for reasons that I don't confidently understand just yet, they use the following values for $$ Q $$ for our multiplication and addition gates:
+`,
+  `
+which gives us in our PLONK constant form $$ Q_La + Q_Rb + Q_OC + Q_Mab + Q_C = 0 $$
+
+$$ 1a + 1b + -1c + -1ab + 0 = 0 $$
+
+$$ 0a + 0b + -1c + 1ab + 0 = 0 $$
+
+next, we convert our Q values in our circuit to their vector forms,
+
+$$ VQ _L = [1,0], VQ_R = [1,0], VQ_O = [-1, -1]$$
+
+$$ VQ_M = [0,1], VQ_C = [0,0] $$
 
 
 `,
@@ -133,7 +153,16 @@ const IndividualRamble = () => {
 
           <FullCircuit />
           <MarkdownWithMaths>{markdown[4]}</MarkdownWithMaths>
-          <PLONKAndGate />
+
+          <div className="mt-5">
+            <PLONKAndGate />
+          </div>
+
+          <div className="mt-5">
+            <PLONKOrGate />
+          </div>
+
+          <MarkdownWithMaths>{markdown[5]}</MarkdownWithMaths>
         </div>
       </div>
     </Layout>

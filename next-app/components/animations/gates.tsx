@@ -289,7 +289,6 @@ const PLONKAndGate = () => (
       >
         <MarkdownWithMaths>{`$$ 1 $$`}</MarkdownWithMaths>
       </foreignObject>
-
       {/* QR */}
       <circle
         cx="70"
@@ -307,6 +306,107 @@ const PLONKAndGate = () => (
         y="15"
       >
         <MarkdownWithMaths>{`$$ 1 $$`}</MarkdownWithMaths>
+      </foreignObject>
+      {/* QO */}
+      <circle
+        cx="110"
+        cy="40"
+        r="15"
+        fill="none"
+        className="fill-black dark:fill-darkCream"
+        strokeWidth="0.4"
+      />
+      <foreignObject
+        width="100%"
+        height="100%"
+        className="text-darkCream dark:text-black"
+        x="100"
+        y="15"
+      >
+        <MarkdownWithMaths>{`$$ -1 $$`}</MarkdownWithMaths>
+      </foreignObject>
+      {/* QM */}
+      <circle
+        cx="150"
+        cy="40"
+        r="15"
+        fill="none"
+        className="fill-black dark:fill-darkCream"
+        strokeWidth="0.4"
+      />
+      <foreignObject
+        width="100%"
+        height="100%"
+        className="text-darkCream dark:text-black"
+        x="140"
+        y="15"
+      >
+        <MarkdownWithMaths>{`$$ -1 $$`}</MarkdownWithMaths>
+      </foreignObject>
+      <circle
+        cx="190"
+        cy="40"
+        r="15"
+        fill="none"
+        className="fill-black dark:fill-darkCream"
+        strokeWidth="0.4"
+      />
+      <foreignObject
+        width="100%"
+        height="100%"
+        className="text-darkCream dark:text-black"
+        x="186"
+        y="15"
+      >
+        <MarkdownWithMaths>{`$$ 0 $$`}</MarkdownWithMaths>
+      </foreignObject>
+    </svg>
+  </div>
+);
+
+const PLONKOrGate = () => (
+  <div>
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="220"
+      height="80"
+      className="border-diagram border-solid border-black dark:border-darkCream rounded-diagram"
+    >
+      {/* QL */}
+      <circle
+        cx="30"
+        cy="40"
+        r="15"
+        className="fill-black dark:fill-darkCream"
+        strokeWidth="0.4"
+      />
+      <foreignObject
+        width="100%"
+        height="100%"
+        className="text-darkCream dark:text-black"
+        x="26"
+        y="15"
+      >
+        <MarkdownWithMaths>{`$$ 0 $$`}</MarkdownWithMaths>
+      </foreignObject>
+
+      {/* QR */}
+      <circle
+        cx="70"
+        cy="40"
+        r="15"
+        fill="none"
+        className="fill-black dark:fill-darkCream"
+        strokeWidth="0.4"
+      />
+      <foreignObject
+        width="100%"
+        height="100%"
+        className="text-darkCream dark:text-black"
+        x="66"
+        y="15"
+      >
+        <MarkdownWithMaths>{`$$ 0 $$`}</MarkdownWithMaths>
       </foreignObject>
 
       {/* QO */}
@@ -341,10 +441,10 @@ const PLONKAndGate = () => (
         width="100%"
         height="100%"
         className="text-darkCream dark:text-black"
-        x="140"
+        x="146"
         y="15"
       >
-        <MarkdownWithMaths>{`$$ -1 $$`}</MarkdownWithMaths>
+        <MarkdownWithMaths>{`$$ 1 $$`}</MarkdownWithMaths>
       </foreignObject>
 
       <circle
@@ -364,8 +464,18 @@ const PLONKAndGate = () => (
       >
         <MarkdownWithMaths>{`$$ 0 $$`}</MarkdownWithMaths>
       </foreignObject>
+
+      <foreignObject
+        width="100%"
+        height="100%"
+        className="text-black dark:text-darkCream"
+        x="226"
+        y="15"
+      >
+        <MarkdownWithMaths>{`$$ = 0 $$`}</MarkdownWithMaths>
+      </foreignObject>
     </svg>
   </div>
 );
 
-export { AndGate, OrGate, FullCircuit, PLONKAndGate };
+export { AndGate, OrGate, FullCircuit, PLONKAndGate, PLONKOrGate };
