@@ -371,17 +371,39 @@ const FullCircuit = () => (
   </div>
 );
 
+const plonkLabelY = -40;
+
 const PLONKAndGate = () => (
   <div>
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      width="220"
-      height="80"
-      className="border-diagram border-solid border-black dark:border-darkCream rounded-diagram"
+      width="300"
+      height="120"
+      viewBox="0 -10 300 100"
+      fill="none"
     >
+      <rect
+        x="10"
+        y="10"
+        rx="10"
+        ry="10"
+        strokeWidth="1"
+        className={`${strokeClass}`}
+        width="220"
+        height="60"
+      />
       {/* QL */}
+      <foreignObject
+        width="100%"
+        height="100%"
+        className="text-black dark:text-darkCream"
+        x="32"
+        y={plonkLabelY}
+      >
+        <MarkdownWithMaths>{`$$ Q_L $$`}</MarkdownWithMaths>
+      </foreignObject>
       <circle
-        cx="30"
+        cx="40"
         cy="40"
         r="15"
         className="fill-black dark:fill-darkCream"
@@ -391,14 +413,24 @@ const PLONKAndGate = () => (
         width="100%"
         height="100%"
         className="text-darkCream dark:text-black"
-        x="26"
-        y="15"
+        x="36"
+        y="12"
       >
-        <MarkdownWithMaths>{`$$ 1 $$`}</MarkdownWithMaths>
+        <MarkdownWithMaths>{`$$ 0 $$`}</MarkdownWithMaths>
       </foreignObject>
+
       {/* QR */}
+      <foreignObject
+        width="100%"
+        height="100%"
+        className="text-black dark:text-darkCream"
+        x="72"
+        y={plonkLabelY}
+      >
+        <MarkdownWithMaths>{`$$ Q_R $$`}</MarkdownWithMaths>
+      </foreignObject>
       <circle
-        cx="70"
+        cx="80"
         cy="40"
         r="15"
         fill="none"
@@ -409,14 +441,23 @@ const PLONKAndGate = () => (
         width="100%"
         height="100%"
         className="text-darkCream dark:text-black"
-        x="66"
-        y="15"
+        x="76"
+        y="12"
       >
-        <MarkdownWithMaths>{`$$ 1 $$`}</MarkdownWithMaths>
+        <MarkdownWithMaths>{`$$ 0 $$`}</MarkdownWithMaths>
       </foreignObject>
       {/* QO */}
+      <foreignObject
+        width="100%"
+        height="100%"
+        className="text-black dark:text-darkCream"
+        x="112"
+        y={plonkLabelY}
+      >
+        <MarkdownWithMaths>{`$$ Q_O $$`}</MarkdownWithMaths>
+      </foreignObject>
       <circle
-        cx="110"
+        cx="120"
         cy="40"
         r="15"
         fill="none"
@@ -427,31 +468,23 @@ const PLONKAndGate = () => (
         width="100%"
         height="100%"
         className="text-darkCream dark:text-black"
-        x="100"
-        y="15"
+        x="110"
+        y="12"
       >
         <MarkdownWithMaths>{`$$ -1 $$`}</MarkdownWithMaths>
       </foreignObject>
       {/* QM */}
-      <circle
-        cx="150"
-        cy="40"
-        r="15"
-        fill="none"
-        className="fill-black dark:fill-darkCream"
-        strokeWidth="0.4"
-      />
       <foreignObject
         width="100%"
         height="100%"
-        className="text-darkCream dark:text-black"
-        x="140"
-        y="15"
+        className="text-black dark:text-darkCream"
+        x="152"
+        y={plonkLabelY}
       >
-        <MarkdownWithMaths>{`$$ -1 $$`}</MarkdownWithMaths>
+        <MarkdownWithMaths>{`$$ Q_M $$`}</MarkdownWithMaths>
       </foreignObject>
       <circle
-        cx="190"
+        cx="160"
         cy="40"
         r="15"
         fill="none"
@@ -462,8 +495,36 @@ const PLONKAndGate = () => (
         width="100%"
         height="100%"
         className="text-darkCream dark:text-black"
-        x="186"
-        y="15"
+        x="156"
+        y="12"
+      >
+        <MarkdownWithMaths>{`$$ 1 $$`}</MarkdownWithMaths>
+      </foreignObject>
+
+      {/* QC */}
+      <foreignObject
+        width="100%"
+        height="100%"
+        className="text-black dark:text-darkCream"
+        x="192"
+        y={plonkLabelY}
+      >
+        <MarkdownWithMaths>{`$$ Q_C $$`}</MarkdownWithMaths>
+      </foreignObject>
+      <circle
+        cx="200"
+        cy="40"
+        r="15"
+        fill="none"
+        className="fill-black dark:fill-darkCream"
+        strokeWidth="0.4"
+      />
+      <foreignObject
+        width="100%"
+        height="100%"
+        className="text-darkCream dark:text-black"
+        x="196"
+        y="12"
       >
         <MarkdownWithMaths>{`$$ 0 $$`}</MarkdownWithMaths>
       </foreignObject>
@@ -475,111 +536,156 @@ const PLONKOrGate = () => (
   <div>
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      width="220"
-      height="80"
-      className="border-diagram border-solid border-black dark:border-darkCream rounded-diagram"
+      width="300"
+      height="120"
+      viewBox="0 -10 300 100"
+      fill="none"
     >
+      <rect
+        x="10"
+        y="10"
+        rx="10"
+        ry="10"
+        strokeWidth="1"
+        className={`${strokeClass}`}
+        width="220"
+        height="60"
+      />
       {/* QL */}
-      <circle
-        cx="30"
-        cy="40"
-        r="15"
-        className="fill-black dark:fill-darkCream"
-        strokeWidth="0.4"
-      />
-      <foreignObject
-        width="100%"
-        height="100%"
-        className="text-darkCream dark:text-black"
-        x="26"
-        y="15"
-      >
-        <MarkdownWithMaths>{`$$ 0 $$`}</MarkdownWithMaths>
-      </foreignObject>
-
-      {/* QR */}
-      <circle
-        cx="70"
-        cy="40"
-        r="15"
-        fill="none"
-        className="fill-black dark:fill-darkCream"
-        strokeWidth="0.4"
-      />
-      <foreignObject
-        width="100%"
-        height="100%"
-        className="text-darkCream dark:text-black"
-        x="66"
-        y="15"
-      >
-        <MarkdownWithMaths>{`$$ 0 $$`}</MarkdownWithMaths>
-      </foreignObject>
-
-      {/* QO */}
-      <circle
-        cx="110"
-        cy="40"
-        r="15"
-        fill="none"
-        className="fill-black dark:fill-darkCream"
-        strokeWidth="0.4"
-      />
-      <foreignObject
-        width="100%"
-        height="100%"
-        className="text-darkCream dark:text-black"
-        x="100"
-        y="15"
-      >
-        <MarkdownWithMaths>{`$$ -1 $$`}</MarkdownWithMaths>
-      </foreignObject>
-
-      {/* QM */}
-      <circle
-        cx="150"
-        cy="40"
-        r="15"
-        fill="none"
-        className="fill-black dark:fill-darkCream"
-        strokeWidth="0.4"
-      />
-      <foreignObject
-        width="100%"
-        height="100%"
-        className="text-darkCream dark:text-black"
-        x="146"
-        y="15"
-      >
-        <MarkdownWithMaths>{`$$ 1 $$`}</MarkdownWithMaths>
-      </foreignObject>
-
-      <circle
-        cx="190"
-        cy="40"
-        r="15"
-        fill="none"
-        className="fill-black dark:fill-darkCream"
-        strokeWidth="0.4"
-      />
-      <foreignObject
-        width="100%"
-        height="100%"
-        className="text-darkCream dark:text-black"
-        x="186"
-        y="15"
-      >
-        <MarkdownWithMaths>{`$$ 0 $$`}</MarkdownWithMaths>
-      </foreignObject>
-
       <foreignObject
         width="100%"
         height="100%"
         className="text-black dark:text-darkCream"
-        x="226"
-        y="15"
+        x="32"
+        y={plonkLabelY}
       >
-        <MarkdownWithMaths>{`$$ = 0 $$`}</MarkdownWithMaths>
+        <MarkdownWithMaths>{`$$ Q_L $$`}</MarkdownWithMaths>
+      </foreignObject>
+      <circle
+        cx="40"
+        cy="40"
+        r="15"
+        className="fill-black dark:fill-darkCream"
+        strokeWidth="0.4"
+      />
+      <foreignObject
+        width="100%"
+        height="100%"
+        className="text-darkCream dark:text-black"
+        x="36"
+        y="12"
+      >
+        <MarkdownWithMaths>{`$$ 1 $$`}</MarkdownWithMaths>
+      </foreignObject>
+
+      {/* QR */}
+      <foreignObject
+        width="100%"
+        height="100%"
+        className="text-black dark:text-darkCream"
+        x="72"
+        y={plonkLabelY}
+      >
+        <MarkdownWithMaths>{`$$ Q_R $$`}</MarkdownWithMaths>
+      </foreignObject>
+      <circle
+        cx="80"
+        cy="40"
+        r="15"
+        fill="none"
+        className="fill-black dark:fill-darkCream"
+        strokeWidth="0.4"
+      />
+      <foreignObject
+        width="100%"
+        height="100%"
+        className="text-darkCream dark:text-black"
+        x="76"
+        y="12"
+      >
+        <MarkdownWithMaths>{`$$ 1 $$`}</MarkdownWithMaths>
+      </foreignObject>
+      {/* QO */}
+      <foreignObject
+        width="100%"
+        height="100%"
+        className="text-black dark:text-darkCream"
+        x="112"
+        y={plonkLabelY}
+      >
+        <MarkdownWithMaths>{`$$ Q_O $$`}</MarkdownWithMaths>
+      </foreignObject>
+      <circle
+        cx="120"
+        cy="40"
+        r="15"
+        fill="none"
+        className="fill-black dark:fill-darkCream"
+        strokeWidth="0.4"
+      />
+      <foreignObject
+        width="100%"
+        height="100%"
+        className="text-darkCream dark:text-black"
+        x="110"
+        y="12"
+      >
+        <MarkdownWithMaths>{`$$ -1 $$`}</MarkdownWithMaths>
+      </foreignObject>
+      {/* QM */}
+      <foreignObject
+        width="100%"
+        height="100%"
+        className="text-black dark:text-darkCream"
+        x="152"
+        y={plonkLabelY}
+      >
+        <MarkdownWithMaths>{`$$ Q_M $$`}</MarkdownWithMaths>
+      </foreignObject>
+      <circle
+        cx="160"
+        cy="40"
+        r="15"
+        fill="none"
+        className="fill-black dark:fill-darkCream"
+        strokeWidth="0.4"
+      />
+      <foreignObject
+        width="100%"
+        height="100%"
+        className="text-darkCream dark:text-black"
+        x="156"
+        y="12"
+      >
+        <MarkdownWithMaths>{`$$ 0 $$`}</MarkdownWithMaths>
+      </foreignObject>
+
+      {/* QC */}
+      <foreignObject
+        width="100%"
+        height="100%"
+        className="text-black dark:text-darkCream"
+        x="192"
+        y={plonkLabelY}
+      >
+        <MarkdownWithMaths>{`$$ Q_C $$`}</MarkdownWithMaths>
+      </foreignObject>
+      <circle
+        cx="200"
+        cy="40"
+        r="15"
+        fill="none"
+        className="fill-black dark:fill-darkCream"
+        strokeWidth="0.4"
+      />
+      <foreignObject
+        width="100%"
+        height="100%"
+        className="text-darkCream dark:text-black"
+        x="196"
+        y="12"
+      >
+        <MarkdownWithMaths>{`$$ 0 $$`}</MarkdownWithMaths>
       </foreignObject>
     </svg>
   </div>
