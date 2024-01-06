@@ -2,260 +2,367 @@ import MarkdownWithMaths from "../markdown/markdown-with-maths";
 
 const strokeClass = "stroke-current text-black dark:text-darkCream";
 
-const AndGate = () => (
+interface GateProps {
+  x: number;
+  y: number;
+  inputNumber: number;
+  aInputHeight?: number;
+  bInputHeight?: number;
+  cOutputHeight?: number;
+}
+
+const OrGate = ({
+  x,
+  y,
+  inputNumber = 0,
+  aInputHeight = 10,
+  bInputHeight = 10,
+  cOutputHeight = 10,
+}: GateProps) => (
   <>
-    <foreignObject
-      width="100%"
-      height="100%"
-      className={strokeClass}
-      x="202"
-      y="160"
-      strokeWidth="0.4"
-    >
-      <MarkdownWithMaths>{`$$ a_1 $$`}</MarkdownWithMaths>{" "}
-    </foreignObject>
-
-    <foreignObject
-      width="100%"
-      height="100%"
-      className={strokeClass}
-      x="240"
-      y="160"
-      strokeWidth="0.4"
-    >
-      <MarkdownWithMaths>{`$$ b_1 $$`}</MarkdownWithMaths>{" "}
-    </foreignObject>
-
-    <foreignObject
-      width="100%"
-      height="100%"
-      className={strokeClass}
-      x="210"
-      y="310"
-      strokeWidth="0.4"
-    >
-      <MarkdownWithMaths>{`$$ c_1 $$`}</MarkdownWithMaths>{" "}
-    </foreignObject>
-
+    {/* top of the gate */}
     <line
-      strokeWidth="0.4"
-      className={strokeClass}
-      x1="205"
-      x2="250"
-      y1="200"
-      y2="200"
-    />
-    <line
-      strokeWidth="0.4"
-      className={strokeClass}
-      x1="205"
-      x2="205"
-      y1="200"
-      y2="300"
-    />
-
-    <foreignObject
-      width="100%"
-      height="100%"
-      className={strokeClass}
-      x="225"
-      y="220"
-      strokeWidth="0.4"
-    >
-      <MarkdownWithMaths>{`$$ * $$`}</MarkdownWithMaths>{" "}
-    </foreignObject>
-
-    <line
-      strokeWidth="0.4"
-      className={strokeClass}
-      x1="250"
-      x2="250"
-      y1="200"
-      y2="300"
-    />
-
-    <path
-      d="M 300,0 A 10,10 0 0,1 300,45"
-      fill="none"
-      className={strokeClass}
-      strokeWidth="0.4"
-      transform="rotate(90 125,125)"
-    />
-
-    <line
-      strokeWidth="0.4"
-      className={strokeClass}
-      x1="227"
-      x2="227"
-      y1="322"
-      y2="425" // so close
-    />
-  </>
-);
-
-// TODO remove these x and ys
-const OrGate = ({ x = 50, y = 50 }: { x?: number; y?: number }) => (
-  <>
-    <line
-      x1="20"
-      x2="235"
-      y1="10"
-      y2="10"
-      strokeWidth="0.4"
-      className={strokeClass}
-    />
-
-    <foreignObject
-      width="100%"
-      height="100%"
-      className={strokeClass}
-      x="7"
-      y="-15"
-      strokeWidth="0.4"
-    >
-      <MarkdownWithMaths>{`$$ x $$`}</MarkdownWithMaths>{" "}
-    </foreignObject>
-
-    <foreignObject
-      width="100%"
-      height="100%"
-      className={strokeClass}
-      x="35"
-      y="35"
-      strokeWidth="0.4"
-    >
-      <MarkdownWithMaths>{`$$ a_0 $$`}</MarkdownWithMaths>{" "}
-    </foreignObject>
-
-    <foreignObject
-      width="100%"
-      height="100%"
-      className={strokeClass}
-      x="35"
-      y="95"
-      strokeWidth="0.4"
-    >
-      <MarkdownWithMaths>{`$$ b_0 $$`}</MarkdownWithMaths>{" "}
-    </foreignObject>
-
-    <foreignObject
-      width="100%"
-      height="100%"
-      className={strokeClass}
-      x="135"
-      y="65"
-      strokeWidth="0.4"
-    >
-      <MarkdownWithMaths>{`$$ c_0 $$`}</MarkdownWithMaths>{" "}
-    </foreignObject>
-
-    <line
-      className={strokeClass}
-      x1="235"
-      x2="235"
-      y1="10"
-      y2="200"
-      strokeWidth="0.4"
-    />
-
-    <line
-      className={strokeClass}
-      x1="10"
-      x2="10"
-      y1="20"
-      y2={y + 20}
-      strokeWidth="0.4"
-    />
-
-    {/* inputs */}
-    <line
-      className={strokeClass}
       x1={x}
-      x2={x - 40}
-      y1={y + 20}
-      y2={y + 20}
+      x2={x + 40}
+      y1={y}
+      y2={y}
       strokeWidth="0.4"
-    />
-    <foreignObject
-      width="100%"
-      height="100%"
       className={strokeClass}
-      x="03"
-      y="90"
+    />
+    {/* left side of the gate */}
+    <line
+      x1={x}
+      x2={x + 20}
+      y1={y}
+      y2={y + 60}
       strokeWidth="0.4"
+      className={strokeClass}
+    />
+    {/* right side of the gate */}
+    <line
+      x1={x + 40}
+      x2={x + 20}
+      y1={y}
+      y2={y + 60}
+      strokeWidth="0.4"
+      className={strokeClass}
+    />
+
+    {/* left input for the gate */}
+    <line
+      x1={x + 10}
+      x2={x + 10}
+      y1={y - aInputHeight}
+      y2={y}
+      strokeWidth="0.4"
+      className={strokeClass}
+    />
+    {/* right input for the gate */}
+    <line
+      x1={x + 30}
+      x2={x + 30}
+      y1={y - bInputHeight}
+      y2={y}
+      strokeWidth="0.4"
+      className={strokeClass}
+    />
+    {/* the output of the gate */}
+    <line
+      x1={x + 20}
+      x2={x + 20}
+      y1={y + 60}
+      y2={y + 60 + cOutputHeight}
+      strokeWidth="0.4"
+      className={strokeClass}
+    />
+    {/* the labels of the gate */}
+    <foreignObject
+      width={100}
+      height={100}
+      style={{ fontSize: "10px" }}
+      className="stroke-current text-black dark:text-darkCream"
+      x={x - 6}
+      y={y - 32}
     >
-      <MarkdownWithMaths>{`$$ -1 $$`}</MarkdownWithMaths>{" "}
+      <MarkdownWithMaths>{`$$ a_${inputNumber} $$`}</MarkdownWithMaths>
     </foreignObject>
 
-    <line
-      className={strokeClass}
-      x1="10"
-      x2="50"
-      y1={y + 80}
-      y2={y + 80}
-      strokeWidth="0.4"
-    />
-
-    <polygon
-      points="50 15, 100 100, 0 100"
-      fill="none"
-      className={strokeClass}
-      strokeLinejoin="round"
-      strokeWidth="0.4"
-      transform={`translate(${x},${y}) rotate(90 ${x},${y})`}
-    />
+    <foreignObject
+      width={100}
+      height={100}
+      style={{ fontSize: "10px" }}
+      className="stroke-current text-black dark:text-darkCream"
+      x={x + 34}
+      y={y - 32}
+    >
+      <MarkdownWithMaths>{`$$ b_${inputNumber} $$`}</MarkdownWithMaths>
+    </foreignObject>
 
     <foreignObject
-      width="100%"
-      height="100%"
-      className={strokeClass}
-      x="75"
-      y="75"
-      strokeWidth="0.4"
+      width={100}
+      height={100}
+      style={{ fontSize: "10px" }}
+      className="stroke-current text-black dark:text-darkCream"
+      x={x + 8}
+      y={y + 40}
+    >
+      <MarkdownWithMaths>{`$$ c_${inputNumber} $$`}</MarkdownWithMaths>
+    </foreignObject>
+
+    <foreignObject
+      width={100}
+      height={100}
+      style={{ fontSize: "10px" }}
+      className="stroke-current text-black dark:text-darkCream"
+      x={x + 15}
+      y={y - 6}
     >
       <MarkdownWithMaths>{`$$ + $$`}</MarkdownWithMaths>
     </foreignObject>
+  </>
+);
 
-    {/* output */}
+const AndGate = ({
+  x,
+  y,
+  inputNumber = 0,
+  aInputHeight = 10,
+  bInputHeight = 10,
+  cOutputHeight = 10,
+}: GateProps) => (
+  <>
+    {/* the top of the gate */}
     <line
+      x1={x}
+      x2={x + 40}
+      y1={y}
+      y2={y}
+      strokeWidth="0.4"
+      className={strokeClass}
+    />
+    {/* the left side of the gate */}
+    <line
+      x1={x}
+      x2={x}
+      y1={y}
+      y2={y + 60}
+      strokeWidth="0.4"
+      className={strokeClass}
+    />
+    {/* the right side of the gate */}
+    <line
+      x1={x + 40}
+      x2={x + 40}
+      y1={y}
+      y2={y + 60}
+      strokeWidth="0.4"
+      className={strokeClass}
+    />
+    {/* the arc of the gate (bottom) */}
+    <path
+      // x,y A rx,ry x-axis-rotation large-arc-flag,sweep-flag x,y
+      d={`M ${x},${y + 60} A 10,10 0 0,1 ${x + 40},${y + 60}`}
+      fill="none"
       className={strokeClass}
       strokeWidth="0.4"
-      x1={x + 70 + 15}
-      x2={x + 70 + 100}
-      y1={y + 50}
-      y2={y + 50}
+      transform={`rotate(180 ${x + 20},${y + 60})`}
     />
 
+    {/* the inputs of the gate */}
     <line
-      className={strokeClass}
-      x1={x + 70 + 100}
-      x2={x + 70 + 100}
-      y1={y + 50}
-      y2={y + 150}
+      x1={x + 10}
+      x2={x + 10}
+      y1={y - aInputHeight}
+      y2={y}
       strokeWidth="0.4"
+      className={strokeClass}
     />
+    <line
+      x1={x + 30}
+      x2={x + 30}
+      y1={y - bInputHeight}
+      y2={y}
+      strokeWidth="0.4"
+      className={strokeClass}
+    />
+    {/* the output of the gate */}
+    <line
+      x1={x + 20}
+      x2={x + 20}
+      y1={y + 80}
+      y2={y + 80 + cOutputHeight}
+      strokeWidth="0.4"
+      className={strokeClass}
+    />
+
+    {/* the labels of the gate */}
+    <foreignObject
+      width={100}
+      height={100}
+      style={{ fontSize: "10px" }}
+      className="stroke-current text-black dark:text-darkCream"
+      x={x - 6}
+      y={y - 32}
+    >
+      <MarkdownWithMaths>{`$$ a_${inputNumber} $$`}</MarkdownWithMaths>
+    </foreignObject>
+
+    <foreignObject
+      width={100}
+      height={100}
+      style={{ fontSize: "10px" }}
+      className="stroke-current text-black dark:text-darkCream"
+      x={x + 34}
+      y={y - 32}
+    >
+      <MarkdownWithMaths>{`$$ b_${inputNumber} $$`}</MarkdownWithMaths>
+    </foreignObject>
+
+    <foreignObject
+      width={100}
+      height={100}
+      style={{ fontSize: "10px" }}
+      className="stroke-current text-black dark:text-darkCream"
+      x={x + 8}
+      y={y + 62}
+    >
+      <MarkdownWithMaths>{`$$ c_${inputNumber} $$`}</MarkdownWithMaths>
+    </foreignObject>
+
+    <foreignObject
+      width={100}
+      height={100}
+      style={{ fontSize: "10px" }}
+      className="stroke-current text-black dark:text-darkCream"
+      x={x + 18}
+      y={y + 10}
+    >
+      <MarkdownWithMaths>{`$$ * $$`}</MarkdownWithMaths>
+    </foreignObject>
   </>
 );
 
 const FullCircuit = () => (
   <div className="text-black dark:text-darkCream">
-    <svg baseProfile="full" height="450" version="1.1" width="400">
+    <svg baseProfile="full" height="500" version="1.1" width="400">
       <polygon
-        points="30,30 400,30 400,30 400,400 400,400 30,400 30,400 30,30"
+        points="30,30 300,30 300,30 300,450 300,450 30,450 30,450 30,30"
         fill="none"
         className="stroke-current text-black dark:text-darkCream"
         strokeLinejoin="round"
         strokeWidth="0.4"
-      ></polygon>
-      <OrGate />
-      <AndGate />
+      />
+
+      <foreignObject
+        width={100}
+        height={100}
+        className={strokeClass}
+        x="10"
+        y="20"
+        strokeWidth="0.4"
+      >
+        <MarkdownWithMaths>{`$$ x $$`}</MarkdownWithMaths>
+      </foreignObject>
+
+      <foreignObject
+        width={100}
+        height={100}
+        className={strokeClass}
+        x="10"
+        y="282"
+        strokeWidth="0.4"
+      >
+        <MarkdownWithMaths>{`$$ 4 $$`}</MarkdownWithMaths>
+      </foreignObject>
+
+      <foreignObject
+        width={50}
+        height={50}
+        className={strokeClass}
+        x="162"
+        y="-15"
+        strokeWidth="0.4"
+      >
+        <MarkdownWithMaths>{`$$ 10 $$`}</MarkdownWithMaths>
+      </foreignObject>
+
+      {/* x inputs */}
+      <line
+        x1="20"
+        x2="150"
+        y1="50"
+        y2="50"
+        strokeWidth="0.4"
+        className={strokeClass}
+      />
+      <AndGate
+        x={60}
+        y={80}
+        inputNumber={0}
+        aInputHeight={30}
+        bInputHeight={30}
+        cOutputHeight={30}
+      />
+      <AndGate
+        x={140}
+        y={80}
+        inputNumber={1}
+        aInputHeight={30}
+        bInputHeight={60}
+        cOutputHeight={30}
+      />
+
+      {/* lines from and gate outputs to first or gate */}
+      <line
+        x1="80"
+        x2="110"
+        y1="190"
+        y2="190"
+        strokeWidth="0.4"
+        className={strokeClass}
+      />
+      <line
+        x1="130"
+        x2="160"
+        y1="190"
+        y2="190"
+        strokeWidth="0.4"
+        className={strokeClass}
+      />
+
+      <OrGate
+        x={100}
+        y={230}
+        inputNumber={2}
+        aInputHeight={40}
+        bInputHeight={40}
+        cOutputHeight={20}
+      />
+
+      <OrGate
+        x={90}
+        y={340}
+        inputNumber={3}
+        aInputHeight={30}
+        bInputHeight={30}
+        cOutputHeight={60}
+      />
+
+      <line
+        x1="20"
+        x2="100"
+        y1="310"
+        y2="310"
+        strokeWidth="0.4"
+        className={strokeClass}
+      />
 
       <foreignObject
         width="100%"
         height="100%"
         className={strokeClass}
-        x="200"
-        y="400"
+        x="100"
+        y="445"
         strokeWidth="0.4"
       >
         <MarkdownWithMaths>{`$$ 420 $$`}</MarkdownWithMaths>
@@ -478,4 +585,4 @@ const PLONKOrGate = () => (
   </div>
 );
 
-export { AndGate, OrGate, FullCircuit, PLONKAndGate, PLONKOrGate };
+export { FullCircuit, PLONKAndGate, PLONKOrGate };

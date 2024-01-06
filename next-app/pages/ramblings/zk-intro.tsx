@@ -50,25 +50,13 @@ and these are just a quick list of topical, potential cool use cases - the world
 
 It's all well and good to describe how cool new technologies could work - but how do we actually implement zero knowledge proofs that computers can work with? Well, to do that, we need to get a bit mathsy.
 
-### Polynomial Commitments
-
-Polynomials are an area of mathematics that is pretty enormous, but I'm not too much of a connoisseur. You might remember them from high school maths, the equations that looked like these ones:
-
-$$ f(x) = 5x^2 + 2y - 7 $$
-
-In this article, we are going to be using a model called PLONK (Permutations over Lagrange-bases for Oecumenical Noninteractive arguments of Knowledge - quite a mouthful), to generate/build a zero knowledge 
-proof system using properties of polynomials that have been found over the years.
-
-PLONK was first proposed in a paper by Ariel Gabizon, Zachary J. Williamson, and Oana Ciobotaru.
-That paper is what I'll be trying to unmathesize a bit with the following explanation.
-
+### Making this a bit more general purpose
 So, let's start by replacing our cave example with the following function:
 
-$$ f(x) = x * (x - 1) = 420 $$
+$$ f(x) = x^2 + 10x + 4 = 420 $$
 
 And instead of a magic password for a door, I know a solution for $$ x $$ where this statement evaluates to true, meaning that
-I know a number where you can subtract 1 from it, multiply it by itself, and it will equal 420. Anybody who can evaluate this same arithmetic, 
-has the capability of verifying this to be true.
+I know a number that you can square, then take this same number and multiply it by 10, sum these 2 numbers, add 4, and the result will be 420.
 
 Or in the context of our cave example:
 
@@ -79,19 +67,20 @@ Or in the context of our cave example:
 
 but, how can we structure this program so that when the verifier evaluates this statement, they do so having no idea what $$ x $$ is? to find out, well, lets go a bit deeper.
 
-the above statement, $$ f(x) = x * (x - 1) = 420 $$, can actually be expressed as a circuit diagram using only additive and multiplicative gates, that is, gates like so:
+the above statement, $$ f(x) = x^2 + 10x + 4 = 420 $$, can actually be expressed as a circuit diagram using only additive and multiplicative gates, that is, gates like so:
 `,
   `
 These kind of logic gates are everywhere in computer science/electrical engineering,
 and you are currently using billions (if not trillions) of them right now.
 
 
-But, our circuit isn't too complex, and only has 2 gates and 2 constraints (hover/click to view):
+But, our circuit isn't too complex, and we have the following constraints (simplifying to our constant values
+where possible):
 
-- $$ a^0 + -1 = c^0 $$ 
-- $$ a^1 * b^1 = c^1 $$
-- $$ c^1 = 420 $$
-- $$ b^0 = - 1 $$
+- $$ a_0 * b_0 = c_0 $$
+- $$ a_1 * b_1 = a_1 * 10 = c_1 $$
+- $$ a_2 + b_2 = c_2 $$
+- $$ a_3 + b_3 = 4 + b_3 = c_3 = 420 \\to b_3 = 416 $$
 
 if all of these conditions are true, then our circuit passes.
 
