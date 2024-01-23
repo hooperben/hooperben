@@ -188,8 +188,6 @@ const IndividualRamble = () => {
         <div className="prose dark:prose-invert text-black dark:text-darkCream dark:prose-strong:text-darkCream dark:prose-h1:text-darkCream dark:prose-h2:text-darkCream dark:prose-h3:text-darkCream dark:prose-h4:text-darkCream dark:prose-h5:text-darkCream dark:prose-h6:text-darkCream">
           <MarkdownWithMaths>{markdown[0]}</MarkdownWithMaths>
           <TheCave />
-          {/* <TheCave incorrect /> */}
-
           <MarkdownWithMaths>{markdown[1]}</MarkdownWithMaths>
           <TheCave isValid />
           <MarkdownWithMaths>{markdown[2]}</MarkdownWithMaths>
