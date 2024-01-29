@@ -180,7 +180,7 @@ const IndividualRamble = () => {
       shareable={{
         title,
         description: "my attempt at explaining ZK",
-        image: "https://hooper.link/zk-proof.png",
+        image: "https://hooper.link/zk-proof-the-cave.png",
         url: "https://hooper.link/ramblings/zk-intro",
       }}
     >
