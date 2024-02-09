@@ -1,9 +1,10 @@
-import Markdown from "react-markdown";
-import Layout from "../../components/Layout";
-import remarkMath from "remark-math";
-import rehypeKatex from "rehype-katex";
 import "katex/dist/katex.min.css";
 import Head from "next/head";
+import Image from "next/image";
+import Markdown from "react-markdown";
+import rehypeKatex from "rehype-katex";
+import remarkMath from "remark-math";
+import Layout from "../../components/Layout";
 
 const results = [
   { track: "Mario Kart Stadium", winner: "Gabba" },
@@ -207,11 +208,14 @@ const IndividualRamble = () => {
         <meta name="twitter:image" content="https://hooper.link/the-96er.png" />
       </Head>
       <div className="flex flex-col w-full">
-        <img
+        <Image
           src="/the-96er.png"
           alt="The 96er"
-          className="pb-5 w-full xs:w-3/4 md:w-3/4 max-w-lg"
+          width={500}
+          height={300}
+          className="w-full xs:w-3/4 md:w-3/4 max-w-lg pb-5"
         />
+
         <div className="max-w-full w-full prose dark:prose-invert text-black dark:text-darkCream dark:prose-strong:text-darkCream dark:prose-h1:text-darkCream dark:prose-h2:text-darkCream dark:prose-h3:text-darkCream dark:prose-h4:text-darkCream dark:prose-h5:text-darkCream dark:prose-h6:text-darkCream">
           <Markdown remarkPlugins={[remarkMath]} rehypePlugins={[rehypeKatex]}>
             {markdown[0]}

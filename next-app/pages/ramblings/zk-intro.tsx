@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Layout from "../../components/Layout";
 import {
   FullCircuit,
@@ -199,10 +200,13 @@ const IndividualRamble = () => {
       }}
     >
       <div className="flex flex-col">
-        <img
+        <Image
+          className="p w-full xs:w-3/4 md:w-3/4 max-w-lg"
           src="/zk-proof-the-cave.png"
           alt="The 96er"
-          className="p w-full xs:w-3/4 md:w-3/4 max-w-lg"
+          width={400}
+          height={400}
+          layout="responsive"
         />
 
         <div className="prose dark:prose-invert text-black dark:text-darkCream dark:prose-strong:text-darkCream dark:prose-h1:text-darkCream dark:prose-h2:text-darkCream dark:prose-h3:text-darkCream dark:prose-h4:text-darkCream dark:prose-h5:text-darkCream dark:prose-h6:text-darkCream">
