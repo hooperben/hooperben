@@ -7,10 +7,10 @@ const TheCave = ({
   isValid?: boolean;
   incorrect?: boolean;
 }) => (
-  <div className="w-12">
+  <div className="flex justify-center w-full">
     <svg
       baseProfile="full"
-      height={isValid || incorrect ? "130" : "100"}
+      height="100"
       version="1.1"
       width={isValid || incorrect ? "120" : "100"}
       xmlns="http://www.w3.org/2000/svg"
@@ -58,10 +58,6 @@ const TheCave = ({
             y1="-10"
             y2="20"
           />
-
-          <text x="20" y="120" fill="green">
-            password ✅
-          </text>
         </>
       )}
 
@@ -96,9 +92,6 @@ const TheCave = ({
             y1="13"
             y2="0"
           />
-          <text x="20" y="120" fill="red">
-            password ❌
-          </text>
         </>
       )}
 

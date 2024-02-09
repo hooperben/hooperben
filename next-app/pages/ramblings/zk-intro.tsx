@@ -12,9 +12,11 @@ const title = "An Introduction to Zero Knowledge Proofs";
 
 const markdown = [
   `
+Man on the precipice of utilising even more polynomials than ever before, circa 2024
+
   ## ${title}
 
-this post is based on a talk I gave at work ~2 months ago, and is an introduction to Zero Knowledge proofs,
+this rambling is an introduction to Zero Knowledge proofs,
 and how we can actually represent some of the interesting examples of zero knowledge proofs as an executable series of computer logic. So, lets get started.
 
 **disclaimer:** as you'll soon see, this can get pretty abstract and mathsy. I am someone interested in mathematics and software -
@@ -29,6 +31,10 @@ Say you have a donut shaped cave like so (top-down view):
 
 `,
   `
+
+**Figure 1:** A donut shaped cave, where the entrance and exit are the same
+
+
 Notice that the entrance and exit are the same, and on the opposite side to the entrance of the cave is a magic door
 (that brown/red line) - that requires a password to open and pass through.
 
@@ -38,10 +44,15 @@ If you can go down one side of the cave, and come out of the other - to anyone o
 this is pretty conclusive evidence that you know the magic password that opens the door.
 `,
   `
+**Figure 2:** A successful path (green) of an entrant who knows the magic password to open the door
+
 If you go down one side, and come back out of that same side, it's pretty conclusive evidence that you do not know the magic password
 (or like maybe you don't wanna prove you know it - you do you).
 `,
   `
+**Figure 3:** An unsuccessful path (red) of an entrant who does not know the magic password to open the door
+
+
 In this model, an observer can verify that you know something, without knowing what it is that you know. 
 
 This is a pretty cool little thought experiment, but how is this useful? Well, the ability to prove information without revealing it has quite a lot of theoretical applications in the real world.
@@ -52,7 +63,8 @@ While the above example might seem oddly specific and arbitrary - if you can ext
 - Want to submit a complaint to your HR person anonymously?
 - Want to submit a vote in an election without revealing who you voted for?
 
-and these are just a quick list of topical, potential cool use cases - the world computer is our oyster.
+and that's still thinking small - the world computer is our oyster.
+
 Zero knowledge proofs are exciting as they represent a new way to get the benefits of modern technology,
 without having to give up some of the privacy we currently sacrifice in every day life for the convenience of modern technologies.
 
@@ -78,7 +90,9 @@ how can we structure this program so that when the verifier evaluates this state
 the above statement, $$ f(x) = x^2 + 10x + 4 = 420 $$, can actually be expressed as a circuit diagram using only additive and multiplicative gates, that is, gates like so:
 `,
   `
-Our above circuit has the following constraints (simplifying to our constant values
+**Figure 4:** A simple circuit diagram with 4 gates, with 2 multiplicative gates and 2 additive gates.
+
+Our above circuit can be also be expressed in constraint form (and simplifying to our constant values
 where possible):
 
 - $$ a_0 * b_0 = c_0 $$
@@ -97,7 +111,7 @@ is a model that takes advantages of a few properties of polynomials to allow us 
 and keep certain values we want secret from a verifier.
 
 PLONK was first [proposed in a paper](https://eprint.iacr.org/2019/953.pdf) by Ariel Gabizon, Zachary J. Williamson, and Oana Ciobotaru.
-That paper is what I'll be trying to unmathesize a bit with the following explanation.
+This paper is what I'm trying to demystify a bit.
 
 so in PLONK, constraints are represented in the form:
 
@@ -185,6 +199,12 @@ const IndividualRamble = () => {
       }}
     >
       <div className="flex flex-col">
+        <img
+          src="/zk-proof-the-cave.png"
+          alt="The 96er"
+          className="p w-full xs:w-3/4 md:w-3/4 max-w-lg"
+        />
+
         <div className="prose dark:prose-invert text-black dark:text-darkCream dark:prose-strong:text-darkCream dark:prose-h1:text-darkCream dark:prose-h2:text-darkCream dark:prose-h3:text-darkCream dark:prose-h4:text-darkCream dark:prose-h5:text-darkCream dark:prose-h6:text-darkCream">
           <MarkdownWithMaths>{markdown[0]}</MarkdownWithMaths>
           <TheCave />
