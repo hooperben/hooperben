@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { useState } from "react";
 import Layout from "../../components/Layout";
 import {
   FullCircuit,
@@ -13,7 +14,7 @@ const title = "An Introduction to Zero Knowledge Proofs";
 
 const markdown = [
   `
-Man on the precipice of utilising even more polynomials than ever before, circa 2024
+Man on the precipice of utilising more polynomials than ever before, circa 2024
 
   ## ${title}
 
@@ -188,7 +189,31 @@ If we repeat this for all our our selectors, we get the following polynomials:
 `,
 ];
 
+type GateNames = "left" | "right" | "output" | "multiplication" | "constant";
+
+const circuitFunctions: Record<GateNames, string> = {
+  left: `$$ Q_L(x) $$`,
+  right: `$$ Q_R(x) $$`,
+  output: `$$ Q_O(x) $$`,
+  multiplication: `$$ Q_M(x) $$`,
+  constant: `$$ Q_C(x) $$`,
+};
+
 const IndividualRamble = () => {
+  const [gatesOpen, setGatesOpen] = useState<{
+    left: boolean;
+    right: boolean;
+    output: boolean;
+    multiplication: boolean;
+    constant: boolean;
+  }>({
+    left: true,
+    right: false,
+    output: false,
+    multiplication: false,
+    constant: false,
+  });
+
   return (
     <Layout
       title={`${title} | hooper.link`}
@@ -206,7 +231,6 @@ const IndividualRamble = () => {
           alt="The 96er"
           width={400}
           height={400}
-          layout="responsive"
         />
 
         <div className="prose dark:prose-invert text-black dark:text-darkCream dark:prose-strong:text-darkCream dark:prose-h1:text-darkCream dark:prose-h2:text-darkCream dark:prose-h3:text-darkCream dark:prose-h4:text-darkCream dark:prose-h5:text-darkCream dark:prose-h6:text-darkCream">
@@ -232,6 +256,36 @@ const IndividualRamble = () => {
             ]}
           />
           <MarkdownWithMaths>{markdown[7]}</MarkdownWithMaths>
+
+          {Object.keys(gatesOpen).map((gate, i) => {
+            return (
+              <div key={gate}>
+                <button
+                  key={gate}
+                  className="w-full bg-darkCream dark:bg-darkNavy text-black dark:text-darkCream py-2 px-4 rounded-md my-4"
+                  onClick={() => {
+                    setGatesOpen({
+                      ...gatesOpen,
+                      [gate]: !gatesOpen[gate],
+                    });
+                  }}
+                >
+                  <MarkdownWithMaths>
+                    {circuitFunctions[gate]}
+                  </MarkdownWithMaths>
+                </button>
+
+                {[
+                  ...Object.keys(gatesOpen).slice(1),
+                  Object.keys(gatesOpen)[0],
+                ].map(
+                  (g_name, i) =>
+                    gatesOpen[g_name] &&
+                    gate == g_name && <div>{g_name} boy open </div>
+                )}
+              </div>
+            );
+          })}
         </div>
       </div>
     </Layout>
