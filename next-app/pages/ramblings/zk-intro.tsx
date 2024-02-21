@@ -199,6 +199,9 @@ const circuitFunctions: Record<GateNames, string> = {
   constant: `$$ Q_C(x) $$`,
 };
 
+const genericMarkdownStyling =
+  "prose dark:prose-invert text-black dark:text-darkCream dark:prose-strong:text-darkCream dark:prose-h1:text-darkCream dark:prose-h2:text-darkCream dark:prose-h3:text-darkCream dark:prose-h4:text-darkCream dark:prose-h5:text-darkCream dark:prose-h6:text-darkCream";
+
 const IndividualRamble = () => {
   const [gatesOpen, setGatesOpen] = useState<{
     left: boolean;
@@ -233,7 +236,7 @@ const IndividualRamble = () => {
           height={400}
         />
 
-        <div className="prose dark:prose-invert text-black dark:text-darkCream dark:prose-strong:text-darkCream dark:prose-h1:text-darkCream dark:prose-h2:text-darkCream dark:prose-h3:text-darkCream dark:prose-h4:text-darkCream dark:prose-h5:text-darkCream dark:prose-h6:text-darkCream">
+        <div className={genericMarkdownStyling}>
           <MarkdownWithMaths>{markdown[0]}</MarkdownWithMaths>
           <TheCave />
           <MarkdownWithMaths>{markdown[1]}</MarkdownWithMaths>
