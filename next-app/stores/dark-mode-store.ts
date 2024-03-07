@@ -6,6 +6,7 @@ interface DarkModeStore {
   toggleDarkMode: () => void;
 }
 
+// TODO fix this
 const useDarkModeStore = create<DarkModeStore>()(
   persist(
     (set) => ({
