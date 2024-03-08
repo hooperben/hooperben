@@ -1,1 +1,1 @@
-hey, hope you're looking after yourself
+trying to find new ways to talk about data structures
