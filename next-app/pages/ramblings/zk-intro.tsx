@@ -190,7 +190,9 @@ If we repeat this for all our our selectors, we get the following polynomials:
 type GateNames = "left" | "right" | "output" | "multiplication" | "constant";
 
 const circuitFunctions: Record<GateNames, string> = {
-  left: `$$ Q_L(x) $$`,
+  left: `
+  $$  Q_L(x) = -\\frac{1}3x^3 + \\frac{3}2x^2 - \\frac{7}6x $$  
+  `,
   right: `$$ Q_R(x) $$`,
   output: `$$ Q_O(x) $$`,
   multiplication: `$$ Q_M(x) $$`,
@@ -235,7 +237,6 @@ const IndividualRamble = () => {
         />
 
         <div className={genericMarkdownStyling}>
-          {/* TODO format this prettier */}
           <MarkdownWithMaths>{markdown[0]}</MarkdownWithMaths>
           <TheCave />
           <MarkdownWithMaths>{markdown[1]}</MarkdownWithMaths>
@@ -283,7 +284,13 @@ const IndividualRamble = () => {
                 ].map(
                   (g_name, i) =>
                     gatesOpen[g_name] &&
-                    gate == g_name && <div>{g_name} function here </div>
+                    gate == g_name && (
+                      <div>
+                        <MarkdownWithMaths>
+                          {circuitFunctions[g_name]}
+                        </MarkdownWithMaths>
+                      </div>
+                    )
                 )}
               </div>
             );
