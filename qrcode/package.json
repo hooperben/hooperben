@@ -1,0 +1,9 @@
+{
+  "name": "qrcode",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "devDependencies": {
+    "qrcode": "^1.5.3"
+  }
+}
