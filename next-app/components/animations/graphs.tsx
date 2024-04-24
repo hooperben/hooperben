@@ -60,6 +60,28 @@ const Outline = () => (
   </>
 );
 
+const getX = (x: number) => {
+  switch (x) {
+    case 0:
+      return 44.5;
+    case 1:
+      return 72.5;
+    case 2:
+      return 100;
+    case 3:
+      return 127.5;
+  }
+};
+
+const getY = (y: number) => {
+  switch (y) {
+    case 0:
+      return 141.5;
+    case 1:
+      return 100;
+  }
+};
+
 const Graph = ({ points }: { points: Point[] }) => (
   <svg
     height={200}
@@ -70,7 +92,7 @@ const Graph = ({ points }: { points: Point[] }) => (
     <QLPath />
     {/* points */}
     {points.map(({ x, y }) => (
-      <circle cx={43 + x * 28.5} cy={142 - y * 40} r={2} />
+      <circle cx={getX(x)} cy={getY(y)} r={2} />
     ))}
   </svg>
 );

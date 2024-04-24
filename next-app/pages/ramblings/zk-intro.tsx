@@ -14,59 +14,60 @@ const title = "An Introduction to Zero Knowledge Proofs";
 
 const markdown = [
   `
+
 Man on the precipice of utilising more polynomials than ever before, circa 2024
 
   ## ${title}
 
 this rambling is an introduction to Zero Knowledge proofs,
-and how we can actually represent some of the interesting examples of zero knowledge proofs as an executable series of computer logic.
+and how we can actually represent some of the interesting examples of zero knowledge proofs, specifically as an executable set of computer logic.
 
 **disclaimer:** as you'll soon see, this can get pretty abstract and mathsy. I am someone interested in mathematics and software -
 but I am by no means a mathematician (I bench way too much). If you see something egregiously incorrect, please let me know.
 
-To start with a definition: A zero knowledge proof is a system in which can you can prove information is true, without revealing the information itself.
+To start with a definition: A zero knowledge proof is a system in which you can prove information is true, without revealing the information itself.
 This is a pretty abstract concept, so lets look at an example.
 
 I think that the best example to demonstrate what a zero knowledge proof is 'The Cave'.
 
-Say you have a donut shaped cave like so (top-down view):
+Say you have a donut shaped cave like so:
 
 `,
   `
 
-**Figure 1:** A donut shaped cave, where the entrance and exit are the same
+**Figure 1:** A donut shaped cave from a top down view.
 
 
 Notice that the entrance and exit are the same, and on the opposite side to the entrance of the cave is a magic door
-(that brown/red line). This door requires a password to open, meaning anyone who knows what this password is is capable of opening this door.
+(that red line). This door requires a password to open, meaning anyone who knows what this password is, is capable of opening this door.
 
 Say you want to prove to someone that you know what the password to this magic door is, but you do not want to share the secret password with them.
 
-If you can go down one side of the cave, and come out of the other - to anyone observing who knows the layout of the cave,
+If you can go down one side of the cave, and come out of the other - to anyone on the outside observing who knows the layout of the cave,
 this is pretty conclusive evidence that you know the magic password that opens the door.
 `,
   `
-**Figure 2:** A successful path (green) of an entrant who knows the magic password to open the door
+**Figure 2:** A successful path (green) of an entrant who knows the magic password to open the door.
 
 If you go down one side, and come back out of that same side, it's pretty conclusive evidence that you do not know the magic password
 (or like maybe you don't wanna prove you know it - you do you).
 `,
   `
-**Figure 3:** An unsuccessful path (red) of an entrant who does not know the magic password to open the door
+**Figure 3:** An unsuccessful path (red) of an entrant who does not know the magic password to open the door.
 
 
 In this model, an observer can verify that you know something, without knowing what it is that you know. 
 
 This is a pretty cool little thought experiment, but how is this useful? Well, the ability to prove information without revealing it has quite a lot of theoretical applications in the real world.
 
-While the above example might seem oddly specific and arbitrary - if you can extract this model to something a bit more generic, you could theoretically use this prover/verifier implementation in a lot of non-cave specific applications. 
+While the above cave example might seem oddly specific and arbitrary - if you can extract this model to something a bit more generic and reusable, you could theoretically use this prover/verifier implementation in a lot of non-cave specific applications. 
 
-- Want to prove to Optus that you have a valid Australian Drivers License - but don't want them to store your drivers license number?
-- Want to submit a complaint to your HR department anonymously?
-- Want to submit a vote in an election without a pencil and paper - but don't want your vote stored in a database that someone else controls?
+- Want to prove to Optus that you have a valid Australian Drivers License number that matches your details - but don't to reveal what that number is?
+- Want to submit a complaint to your HR department, verifiably anonymously?
+- Want to submit a vote in an election digitally - but don't want your vote stored in a database that someone else controls?
 
-Zero knowledge proofs are exciting as they represent a new way to get the benefits of modern technology,
-without having to give up some of the privacy we currently sacrifice in every day life for the convenience of modern technologies.
+Zero knowledge proofs are exciting as they represent a new way to *potentially* get the benefits of modern technology,
+without having to give up some of the privacy we currently sacrifice in every day life for the convenience of these modern technologies.
 
 It's all well and good to describe how cool new technologies could work - but how do we actually implement zero knowledge proofs that computers can work with?
 Well, to do that, we need to get a bit mathsy.
@@ -81,14 +82,14 @@ I know a number that you can square, then take this same number and multiply it 
 
 Or in the context of our cave example:
 
-- $$ f(x) $$ = the tunnel
+- $$ f(x) $$ = the function, our cave
 - $$ x $$ = magic password
 - verifier = anyone who can evaluate this statement
-- prover = me, the person who knows a solution
+- prover = me, the person who knows the secret password
 
-how can we structure this program so that when the verifier evaluates this statement, they do so having no idea what $$ x $$ is?
+How can we structure this program so that when the verifier evaluates this statement, they do so having no idea what $$ x $$ is?
 
-For this process - we need to pull apart our function a bit more and inspect its parts. To get started with this, the above statement $$ f(x) = x^2 + 10x + 4 = 420 $$,
+To do this - we need to pull apart our function a bit more and inspect its parts. To get started with this, the above statement $$ f(x) = x^2 + 10x + 4 = 420 $$,
 can actually be expressed as a circuit diagram using only additive and multiplicative gates, gates like so:
 `,
   `
@@ -101,9 +102,9 @@ Once we have our above circuit designed - we can express it in what is called co
 - $$ a_2 + b_2 = c_2 $$
 - $$ a_3 + b_3 = 4 + b_3 = c_3 = 420 \\to b_3 = 416 $$
 
-if all of these conditions are met - then our circuit evaluates successfully, meaning that our calculated value $$ c_3 $$ matches our expected output $$ 420 $$.
+If all of these conditions are met - then our circuit evaluates successfully, meaning that our calculated value $$ c_3 $$ matches our expected output $$ 420 $$, i.e, it's a valid secret password for the cave door.
 
-now that we've got our constraints mapped out, we can convert them to PLONK constraints. What's a PLONK you ask? well
+Now that we've got our constraints mapped out, we can convert them to PLONK constraints. What's a PLONK you ask? well
 
 ### PLONK
 
@@ -111,7 +112,9 @@ PLONK is short for _**P**ermutations over **L**agrange-bases for **O**ecumenical
 is the secret sauce that takes advantages of a few properties of polynomials to allow us to both represent our constraints as executable arithmetic,
 and keep certain values we want secret from a verifier.
 
-PLONK was first [proposed in a paper](https://eprint.iacr.org/2019/953.pdf) by Ariel Gabizon, Zachary J. Williamson, and Oana Ciobotaru.
+PLONK was first [proposed in a paper](https://eprint.iacr.org/2019/953.pdf) in 2019 by Ariel Gabizon, Zachary J. Williamson, and Oana Ciobotaru.
+That paper is a good read, but it can be a little dry. The following explanation of PLONK is my attempt to retell these concepts in a much
+more Queenslander english.
 
 in PLONK, constraints are represented in the form:
 
@@ -119,9 +122,9 @@ $$ Q_La + Q_Rb + Q_Oc + Q_Mab + Q_C = 0 $$
 
 where:
 
-- $$ Q_L $$ = the left input wire
-- $$ Q_R $$ = the right input wire
-- $$ Q_O $$ = the output wire
+- $$ Q_L $$ = the left input 
+- $$ Q_R $$ = the right input
+- $$ Q_O $$ = the output 
 - $$ Q_M $$ = a multiplication flag
 - $$ Q_C $$ = a constant - allows for constant values in our circuit (when needed)
 
@@ -182,7 +185,7 @@ points, we can find the following polynomial:
 
 $$  Q_L(x) = -\\frac{1}3x^3 + \\frac{3}2x^2 - \\frac{7}6x $$
 
-If we repeat this for all our our selectors, we get the following polynomials:
+If we repeat this for all our our selectors, we get the following polynomials (you can click on the equation to show the working of how I got these values):
 
 `,
 ];
