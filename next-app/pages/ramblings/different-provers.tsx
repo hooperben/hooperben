@@ -5,7 +5,15 @@ import rehypeKatex from "rehype-katex";
 import remarkMath from "remark-math";
 import Layout from "../../components/Layout";
 
-const markdown = `placeholder`;
+const markdown = `
+
+## Different Proving Models
+
+This article is based on a talk I saw at ETH Prague (GET NAME) from extropy.
+
+Before recently, I was only really familiar with the PLONK model of Zero Knowledge based systems.
+
+`;
 
 const IndividualRamble = () => {
   return (
