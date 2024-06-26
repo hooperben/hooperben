@@ -58,7 +58,7 @@ const sections = [
 
   ### Experience
 
-  <img src="https://labrys.io/_next/image?url=%2Fimages%2Ffooter%2Flogo-wrapped.png&w=640&q=75" alt="drawing" width="100"/>
+  <img src="/labrys.webp" alt="drawing" width="100"/>
 
   #### Labrys
 
