@@ -11,7 +11,7 @@ import { SiSolidity, SiTypescript } from "react-icons/si";
 
 const sections = [
   `
-  ## My Flex Catalogue
+  ## Background Story
 
   I am currently a Full Stack Engineer $$ (hacker_man) $$, who is most interested in blockchain and distributed computer systems. There's
   a few areas of blockchain, and lately I am most interested in zero knowledge proofs and their applications.
@@ -31,7 +31,7 @@ const sections = [
   `
   <br>
 
-  ### Back End / Databases / Data Structures (the tendons and the grizzly shit)
+  ### Back End / Databases / Data Structures 
  
   I am most familiar with moving data around using typescript, and have a pretty extensive knowledge of solidity
   and the EVM as a whole.
@@ -65,7 +65,8 @@ const sections = [
   **October 2021 - Ongoing**
 
   I am currently a Senior Blockchain Engineer at Labrys. Labrys is a blockchain consultancy that does a little bit of everything.
-  I primarily work with web technologies - mostly MERN stack for web 2 integrations, and Solidity/EVM based solutions for web 3 integrations.
+  I primarily work with web technologies - mostly Mongo, Express, NextJS/React/Node for web 2 integrations, and Solidity/EVM based
+  solutions for web 3 integrations.
 
   <img src="https://www.mtpconnect.org.au/m/Image?Action=View&Image_id=880" alt="drawing" width="100"/>
 

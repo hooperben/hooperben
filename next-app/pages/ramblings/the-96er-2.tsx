@@ -1,3 +1,5 @@
+"use client";
+
 import "katex/dist/katex.min.css";
 import Head from "next/head";
 import Image from "next/image";
@@ -5,6 +7,51 @@ import Markdown from "react-markdown";
 import rehypeKatex from "rehype-katex";
 import remarkMath from "remark-math";
 import Layout from "../../components/Layout";
+import {
+  Table,
+  TableBody,
+  TableCaption,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "../../@/components/ui/table";
+import { TrendingUp } from "lucide-react";
+import { LabelList, Pie, PieChart } from "recharts";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "../../@/components/ui/card";
+import {
+  ChartConfig,
+  ChartContainer,
+  ChartTooltip,
+  ChartTooltipContent,
+} from "../../@/components/ui/chart";
+
+const chartData = [
+  { racer: "Gabba", wins: 52, fill: "green" },
+  { racer: "Sweeney", wins: 28, fill: "orange" },
+  { racer: "Noah", wins: 2, fill: "purple" },
+  { racer: "Ben", wins: 8, fill: "blue" },
+  { racer: "The Mob (CPU)", wins: 6, fill: "red" },
+];
+
+const chartConfig = {
+  wins: {
+    label: "Total Wins",
+  },
+  Gabba: { label: "Gabba", color: "#fff" },
+  Sweeney: { label: "Sweeney" },
+  Noah: { label: "Noah" },
+  Ben: { label: "Ben" },
+  "The Mob (CPU)": { label: "The Mob", color: "black" },
+  other: { label: "Other" },
+} satisfies ChartConfig;
 
 const results = [
   {
@@ -24,7 +71,7 @@ const results = [
   },
   {
     track: "Thomp Ruins",
-    winner: "Benny",
+    winner: "Ben",
     insights: "",
   },
   {
@@ -39,7 +86,7 @@ const results = [
   },
   {
     track: "Twisted Mansion",
-    winner: "Benny",
+    winner: "Ben",
     insights: "2 twisted",
   },
   {
@@ -73,7 +120,7 @@ const results = [
     insights: "KC",
   },
   {
-    track: "Bone dry dunes",
+    track: "Bone Dry dunes",
     winner: "Gabba",
     insights: "Podium",
   },
@@ -103,7 +150,7 @@ const results = [
     insights: "Best map in the game",
   },
   {
-    track: "toads turnpike",
+    track: "Toads Turnpike",
     winner: "Gabba",
     insights: "2 200s - podium",
   },
@@ -144,8 +191,8 @@ const results = [
   },
   {
     track: "Yoshi Valley",
-    winner: "Benny",
-    insights: "\"* as didn't hit the cannon on the first lap",
+    winner: "Ben",
+    insights: "* as didn't hit the cannon on the first lap",
   },
   {
     track: "Tick Tock Clock",
@@ -205,7 +252,7 @@ const results = [
   {
     track: "Hyrule Circuit",
     winner: "Link (Still First Mob)",
-    insights: '"All 4 hit in a bomb',
+    insights: "All 4 players hit with single bomb",
   },
   {
     track: "Baby Park",
@@ -235,7 +282,7 @@ const results = [
   {
     track: "Ribbon Road",
     winner: "Gabba",
-    insights: "Inside",
+    insights: "this map is inside",
   },
   {
     track: "Super bell Subway",
@@ -244,8 +291,8 @@ const results = [
   },
   {
     track: "Big Blue",
-    winner: "Benny",
-    insights: "Last Race wins",
+    winner: "Ben",
+    insights: "Last Race wins (first half)",
   },
   {
     track: "Paris Promenade",
@@ -374,7 +421,7 @@ const results = [
   },
   {
     track: "Riverside Park",
-    winner: "Benny",
+    winner: "Ben",
     insights: "Great map",
   },
   {
@@ -395,7 +442,7 @@ const results = [
   {
     track: "Mario Circuit",
     winner: "Sweeney",
-    insights: "not many ligtening on the seans",
+    insights: "not many lightenings on the seans",
   },
   {
     track: "Waluigi Stadium",
@@ -440,7 +487,7 @@ const results = [
   {
     track: "Koopa Cape",
     winner: "Gabba",
-    insights: "sweeney unfornate red",
+    insights: "sweeney unfortunate red",
   },
   {
     track: "Vancouver Velocity",
@@ -449,7 +496,7 @@ const results = [
   },
   {
     track: "Rome Avanti",
-    winner: "Benny",
+    winner: "Ben",
     insights: "",
   },
   {
@@ -469,7 +516,7 @@ const results = [
   },
   {
     track: "Madrid Drive",
-    winner: "Benny",
+    winner: "Ben",
     insights: "",
   },
   {
@@ -479,13 +526,13 @@ const results = [
   },
   {
     track: "Bowser Castle 3",
-    winner: "Benny",
+    winner: "Ben",
     insights: "and thats how it can happen",
   },
   {
     track: "Rainbow Road",
     winner: "Sweeney",
-    insights: "",
+    insights: "Last race wins",
   },
 ];
 
@@ -526,22 +573,25 @@ const markdown = [
   `
   ## The 96er part 2
   
-  This is the 2nd annual 96er, an event where we race all 96 maps available in mario kart 8 (with DLC).
+  If you're reading this, it means that we've successfully completed a 96er,
+  an event where we race all 96 maps available in mario kart 8 (48 standard + 48 DLC tracks).
 
   This year we had 4 participants, Gabba, Sweeney, Noah and myself.
   
   The results were as follows:
   `,
-
   `
-  this is an image of a mario kart scoreboard. 
-  Can you please transcribe this to a JSON object, where place is indexable.
+  Next, we can see the points distribution over the races.
+  `,
+  `
+  I recorded these data points by taking a photo of the scoreboard after every race (except the 2 I forgot,
+  Cheep Cheep beach and Daisy Cruiser)
   `,
 ];
 
 const IndividualRamble = () => {
   return (
-    <Layout title={`The 96er | hooper.link`}>
+    <Layout title={`The 2nd 96er | hooper.link`}>
       <Head>
         {/* Title of the page */}
         <title>The 2nd 96er</title>
@@ -580,14 +630,82 @@ const IndividualRamble = () => {
         />
       </Head>
       <div className="flex flex-col w-full">
-        <div className="max-w-full w-full prose dark:prose-invert text-black dark:text-darkCream dark:prose-strong:text-darkCream dark:prose-h1:text-darkCream dark:prose-h2:text-darkCream dark:prose-h3:text-darkCream dark:prose-h4:text-darkCream dark:prose-h5:text-darkCream dark:prose-h6:text-darkCream">
-          <Markdown remarkPlugins={[remarkMath]} rehypePlugins={[rehypeKatex]}>
+        <div className="max-w-full w-full prose-p:text-[14px] prose dark:prose-invert text-black dark:text-darkCream dark:prose-strong:text-darkCream dark:prose-h1:text-darkCream dark:prose-h2:text-darkCream dark:prose-h3:text-darkCream dark:prose-h4:text-darkCream dark:prose-h5:text-darkCream dark:prose-h6:text-darkCream">
+          <Markdown
+            remarkPlugins={[remarkMath]}
+            rehypePlugins={[rehypeKatex]}
+            className="mb-[-30px]"
+          >
             {markdown[0]}
           </Markdown>
 
           <div className="flex flex-col text-black dark:text-darkCream">
-            <ResultsTable />
+            <Table>
+              <TableHeader>
+                <TableRow>
+                  <TableHead className="w-[20px] font-bold text-center">
+                    #
+                  </TableHead>
+                  <TableHead className="w-[50px] font-bold">Track</TableHead>
+                  <TableHead className="w-[50px] font-bold">Winner</TableHead>
+                  <TableHead className="w-[200px] font-bold">
+                    Insights
+                  </TableHead>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
+                {results.map((result, i) => (
+                  <TableRow className="text-md" key={i}>
+                    <TableCell className="text-center font-bold">
+                      {i + 1}
+                    </TableCell>
+                    <TableCell>{result.track}</TableCell>
+                    <TableCell>{result.winner}</TableCell>
+                    <TableCell>{result.insights}</TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
           </div>
+
+          <Card className="flex flex-col">
+            <CardHeader className="items-center py-4">
+              <CardTitle>Win Distribution</CardTitle>
+            </CardHeader>
+            <CardContent className="flex-1 pb-0">
+              <ChartContainer
+                config={chartConfig}
+                className="mx-auto aspect-square max-h-[400px]"
+              >
+                <PieChart>
+                  {/* <ChartTooltip
+                    content={<ChartTooltipContent nameKey="wins" hideLabel />}
+                  /> */}
+                  <Pie data={chartData} dataKey="wins">
+                    <LabelList
+                      dataKey="racer"
+                      className="fill-background"
+                      stroke="black"
+                      fontSize={14}
+                      formatter={(value: keyof typeof chartConfig) => {
+                        const winsAmount = results.filter(
+                          (result) =>
+                            result.winner === chartConfig[value]?.label,
+                        ).length;
+                        return `${chartConfig[value]?.label} - ${
+                          winsAmount === 0 ? 6 : winsAmount
+                        }`;
+                      }}
+                    />
+                  </Pie>
+                </PieChart>
+              </ChartContainer>
+            </CardContent>
+          </Card>
+
+          <Markdown remarkPlugins={[remarkMath]} rehypePlugins={[rehypeKatex]}>
+            {markdown[1]}
+          </Markdown>
         </div>
       </div>
     </Layout>
