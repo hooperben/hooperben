@@ -9,7 +9,7 @@
   },
   {
     "player": "Waluigi",
-    "score": 38
+    "score": 36
   },
   {
     "player": "Luigi",
@@ -37,14 +37,14 @@
   },
   {
     "player": "Wendy",
-    "score": 15
-  },
-  {
-    "player": "Inkling Boy",
     "score": 14
   },
   {
-    "player": "Morton",
+    "player": "Inkling Boy",
     "score": 13
+  },
+  {
+    "player": "Morton",
+    "score": 4
   }
 ]
