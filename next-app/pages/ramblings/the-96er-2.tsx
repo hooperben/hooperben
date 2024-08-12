@@ -596,7 +596,7 @@ const markdown = [
   ![json-scores](/2nd-96er/json-scores.png)
 
   First, I need to write a script that takes all of the JSON files, and extracts the greatest score value. This will help me sort the input data into a *somewhat* chronological order,
-  which will be easier to plot on an x axis.
+  which will be easier to plot along an x-axis.
 
   But, here is where I hit another snag - as we did 2 x 48 races, I had 2 similar very score ranges. e.g, Mario Kart
   Stadium and Paris Promenade were the same values for max points score - and at the moment I didn't have a way to differentiate between which race was 
