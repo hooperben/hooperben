@@ -742,7 +742,7 @@ const SecondHalfChart = () => {
       <CardContent>
         <ChartContainer
           config={secondHalfChartConfig}
-          className="mx-auto aspect-square max-h-[500px]"
+          className="aspect-square max-h-[500px]"
         >
           <LineChart accessibilityLayer data={secondHalfChartData}>
             <CartesianGrid vertical={false} />

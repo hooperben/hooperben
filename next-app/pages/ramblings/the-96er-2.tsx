@@ -636,6 +636,47 @@ const markdown = [
 
   ![index-sorting-output](/2nd-96er/index-sorting-output.png)
 
+  Once I had this, I just had to write [this script](https://github.com/hooperben/hooperben/blob/main/scripts/convert-to-chart-input.ts)
+  that outputs the track placing data (our \`.jsons\`) into a format that I could use to plot the data on a graph, e.g:
+
+  \`\`\`ts
+  const results = [
+    {
+    track: 1,
+    "Donkey Kong": 15,
+    "Black Shy Guy": 12,
+    Bowser: 10,
+    Toadette: 9,
+    "Baby Daisy": 8,
+    Waluigi: 7,
+    Luigi: 6,
+    "Pink Gold Peach": 5,
+    "Tanooki Mario": 4,
+    "King Boo": 3,
+    Link: 2,
+    Kamek: 1,
+  },
+  {
+    track: 2,
+    "Donkey Kong": 30,
+    "Black Shy Guy": 21,
+    Waluigi: 19,
+    Toadette: 19,
+    Bowser: 17,
+    "Pink Gold Peach": 13,
+    "Baby Daisy": 13,
+    Luigi: 12,
+    "King Boo": 7,
+    Link: 5,
+    "Tanooki Mario": 5,
+    Kamek: 3,
+  },
+  ...
+  ]
+  \`\`\`\`
+
+  And, that's how I got the above line graphs.
+  
   `,
 ];
 
@@ -733,7 +774,7 @@ const IndividualRamble = () => {
             <CardContent className="flex-1 pb-0">
               <ChartContainer
                 config={chartConfig}
-                className="mx-auto aspect-square max-h-[400px]"
+                className="aspect-square max-h-[400px]"
               >
                 <PieChart>
                   <Pie data={chartData} dataKey="wins">

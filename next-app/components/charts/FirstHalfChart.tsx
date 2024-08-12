@@ -743,7 +743,7 @@ const FirstHalfChart = () => {
       <CardContent>
         <ChartContainer
           config={firstHalfChartConfig}
-          className="mx-auto aspect-square max-h-[500px]"
+          className="aspect-square max-h-[500px]"
         >
           <LineChart accessibilityLayer data={firstHalfChartData}>
             <CartesianGrid vertical={false} />
@@ -772,6 +772,7 @@ const FirstHalfChart = () => {
                     stroke={firstHalfChartConfig[key].color}
                     strokeWidth={2}
                     dot={false}
+                    name={key}
                   />
                 );
               }),
