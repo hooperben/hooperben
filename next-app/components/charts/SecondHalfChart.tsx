@@ -1,4 +1,4 @@
-import { CartesianGrid, Line, LineChart, XAxis, YAxis } from "recharts";
+import { CartesianGrid, Legend, Line, LineChart, XAxis, YAxis } from "recharts";
 
 import {
   Card,
@@ -718,10 +718,10 @@ const secondHalfChartData = [
 ];
 
 const secondHalfChartConfig = {
-  "Donkey Kong": { label: "Donkey Kong", color: "green" },
-  "White Shy Guy": { label: "White Shy Guy", color: "orange" },
-  Waluigi: { label: "Waluigi", color: "blue" },
-  Luigi: { label: "Luigi", color: "purple" },
+  "Donkey Kong": { label: "Donkey Kong (Gabba)", color: "green" },
+  "White Shy Guy": { label: "White Shy Guy (Sweeney)", color: "orange" },
+  Waluigi: { label: "Waluigi (Ben)", color: "blue" },
+  Luigi: { label: "Luigi (Noah)", color: "purple" },
   "Petey Piranha": { label: "Petey Piranha", color: "rgb(127, 112, 112)" },
   "Bowser Jr.": { label: "Bowser Jr.", color: "rgb(218, 196, 58)" },
   "Tanooki Mario": { label: "Tanooki Mario", color: "brown" },
@@ -731,6 +731,30 @@ const secondHalfChartConfig = {
   Larry: { label: "Larry", color: "rgb(218, 196, 58)" },
   Morton: { label: "Morton", color: "brown" },
 } satisfies ChartConfig;
+
+const renderLegend = (props) => {
+  const { payload } = props;
+
+  if (!payload) return null;
+
+  const all = payload.slice(0, 12);
+
+  return (
+    <div className="text-center">
+      {all.map((entry, index) => (
+        <span
+          key={`item-${index}`}
+          style={{
+            color: secondHalfChartConfig[entry.value].color,
+            marginRight: 2,
+          }}
+        >
+          {secondHalfChartConfig[entry.value].label},
+        </span>
+      ))}
+    </div>
+  );
+};
 
 const SecondHalfChart = () => {
   return (
@@ -759,6 +783,8 @@ const SecondHalfChart = () => {
               axisLine={false}
               tickMargin={2}
             />
+
+            <Legend content={renderLegend} />
 
             {secondHalfChartData.flatMap((chartItem) =>
               Object.keys(chartItem).map((key) => {
