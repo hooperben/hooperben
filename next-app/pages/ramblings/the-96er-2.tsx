@@ -22,6 +22,7 @@ import {
   CardTitle,
 } from "../../@/components/ui/card";
 import { ChartConfig, ChartContainer } from "../../@/components/ui/chart";
+import FirstHalfChart from "../../components/charts";
 
 const chartData = [
   { racer: "Gabba", wins: 52, fill: "green" },
@@ -606,7 +607,25 @@ const markdown = [
   \`\`\`
 
   So, if I just rip out the track name and remove the spaces - I should be able to match most of the track names to the score data file I have for that track.
+  This initially worked pretty well, basically leaving only duplicate rainbow roads and the 2 maps I forgot to take photos of:
 
+  ![unordered-maps](/2nd-96er/unordered-maps.png)
+
+  From here, I just had to add an index the rainbow road results array to match how I stored the photos of the Rainbow road scores:
+
+  ![sorted-rainbow-roads](/2nd-96er/sorted-rainbow-roads.png)
+
+  here,
+
+  - **RainbowRoad_Blue.png** - the rainbow road with the tunnel where you should hit the blue at the end
+  - **RainbowRoad_hardturn.png**  - the rainbow road with the super hard turn at the start
+  - **RainbowRoad_Jumps.png**  - the simpler rainbow road with the little jumps
+  - **RainbowRoad_NoLaps.png**  - the rainbow road where it's all continuous, no laps
+  - **RainbowRoad.png**  - the first file I named so it just got called rainbow road
+
+  Once I factored this in, I was able to sort the race data I had from races 1-96, except the 2 I forgot to take photos of (we'll come back to that later):
+
+  ![index-sorting-output](/2nd-96er/index-sorting-output.png)
 
   `,
 ];
@@ -725,6 +744,8 @@ const IndividualRamble = () => {
               </ChartContainer>
             </CardContent>
           </Card>
+
+          <FirstHalfChart />
 
           <Markdown remarkPlugins={[remarkMath]} rehypePlugins={[rehypeKatex]}>
             {markdown[1]}
