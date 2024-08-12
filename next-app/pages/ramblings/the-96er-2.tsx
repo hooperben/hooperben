@@ -2,7 +2,6 @@
 
 import "katex/dist/katex.min.css";
 import Head from "next/head";
-import Image from "next/image";
 import Markdown from "react-markdown";
 import rehypeKatex from "rehype-katex";
 import remarkMath from "remark-math";
@@ -10,28 +9,19 @@ import Layout from "../../components/Layout";
 import {
   Table,
   TableBody,
-  TableCaption,
   TableCell,
   TableHead,
   TableHeader,
   TableRow,
 } from "../../@/components/ui/table";
-import { TrendingUp } from "lucide-react";
 import { LabelList, Pie, PieChart } from "recharts";
 import {
   Card,
   CardContent,
-  CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle,
 } from "../../@/components/ui/card";
-import {
-  ChartConfig,
-  ChartContainer,
-  ChartTooltip,
-  ChartTooltipContent,
-} from "../../@/components/ui/chart";
+import { ChartConfig, ChartContainer } from "../../@/components/ui/chart";
 
 const chartData = [
   { racer: "Gabba", wins: 52, fill: "green" },
@@ -70,7 +60,7 @@ const results = [
     insights: "",
   },
   {
-    track: "Thomp Ruins",
+    track: "Thwomp Ruins",
     winner: "Ben",
     insights: "",
   },
@@ -536,44 +526,11 @@ const results = [
   },
 ];
 
-const ResultsTable = () => (
-  <div className="" style={{ width: "90%" }}>
-    <table className="text-xs text-left">
-      <thead className="uppercase dark:text-darkCream">
-        <tr>
-          <th scope="col" className="py-3">
-            Race
-          </th>
-          <th scope="col" className="py-3 pl-1">
-            Track
-          </th>
-          <th scope="col" className="py-3 pl-1">
-            Winner
-          </th>
-          <th scope="col" className="py-3">
-            Insights
-          </th>
-        </tr>
-      </thead>
-      <tbody>
-        {results.map((result, index) => (
-          <tr key={index}>
-            <td className="py-4 text-center">{index + 1}</td>
-            <td className="py-4 pl-1">{result.track}</td>
-            <td className="py-4 pl-1">{result.winner}</td>
-            {result.insights && <td className="py-4">{result.insights}</td>}
-          </tr>
-        ))}
-      </tbody>
-    </table>
-  </div>
-);
-
 const markdown = [
   `
   ## The 96er part 2
   
-  If you're reading this, it means that we've successfully completed a 96er,
+  If you're reading this, it means that we've successfully completed a 2nd 96er,
   an event where we race all 96 maps available in mario kart 8 (48 standard + 48 DLC tracks).
 
   This year we had 4 participants, Gabba, Sweeney, Noah and myself.
@@ -581,11 +538,76 @@ const markdown = [
   The results were as follows:
   `,
   `
-  Next, we can see the points distribution over the races.
-  `,
-  `
-  I recorded these data points by taking a photo of the scoreboard after every race (except the 2 I forgot,
-  Cheep Cheep beach and Daisy Cruiser)
+  This year, I wanted to see just what kind of data I could somewhat easily record and analyse from the 96er. 
+
+  So, I thought that it would be a good start to take a photo of the scoreboard after every race (except the 2 I forgot, Cheep Cheep beach and Daisy Cruiser).
+  From here, I was able to over engineer a solution to get the data from the photos into a format that I could analyse.
+
+  First, I did have to go through and manually name each of the 94 images I took with something resembling their track name. This took me about
+  half an hour and wasn't really necessary, but it makes the input data a bit nicer so thats something.
+
+  Now that I had all of my 'TRACK_NAME.HEIC' image files:
+
+ ![heic-files](/2nd-96er/heic-files.png)
+
+  It's time to send it to GPT to ask it to rip out the information I need.
+  Unfortunately, as I was about to learn, GPT does not allow for processing of HEIC images:
+
+  ![unsupported-format](/2nd-96er/unsupported-format.png)
+
+  so I had to write another script to convert the images from .HEIC to .PNGs.
+
+  ![png-conversion](/2nd-96er/png-conversion.png)
+
+  which seems to have worked well:
+
+  ![formatted-pngs](/2nd-96er/formatted-pngs.png)
+
+  Now that I can send the images to GPT to analyse, I had to cook up a prompt to get GPT to return the data in the format I wanted. I went for:
+
+  \`\`\`bash
+  You are mario kart score GPT. Here is a photo of a mario kart scoreboard.
+
+  Can you please return this leaderboard as a JSON array of 12 items,
+  containing the player and score?
+
+  Please add a START and END string at the beginning and end of the JSON,
+  and do not add any formatting (new lines, tabs, etc).
+  \`\`\`
+
+  I just needed to run this for all 94 of my newly converted PNGs and I should have all scoring data I need output to a single folder, and voila, it appears to run well:
+  
+  ![score-analysis](/2nd-96er/score-analysis.png)
+
+  Now that I have a folder full of the scores from each map, I can really cook.
+
+  ![json-scores](/2nd-96er/json-scores.png)
+
+  First, I need to write a script that takes all of the JSON files, and extracts the greatest score value. This will help me sort the input data into a *somewhat* chronological order,
+  which will be easier to plot on an x axis.
+
+  But, here is where I hit another snag - as we did 2 x 48 races, I had 2 similar very score ranges. E.g, Mario Kart
+  Stadium and Paris Promenade were the same values for max points score - and at the moment I didn't have a way to differentiate between which race was 
+  in the first 48 and which was the 2nd.
+
+  ![sorting-snafu](/2nd-96er/sorting-snafu.png)
+
+  However, this is where I was able to repurpose the array I used in the table at the top of this screen. It's in the form:
+  \`\`\`\ts
+  const results = [
+    ...
+    {
+      track: "Big Blue",
+      winner: "Ben",
+      insights: "Last Race wins (first half)",
+    },
+    ...
+  ]
+  \`\`\`
+
+  So, if I just rip out the track name and remove the spaces - I should be able to match most of the track names to the score data file I have for that track.
+
+
   `,
 ];
 
@@ -685,6 +707,7 @@ const IndividualRamble = () => {
                     <LabelList
                       dataKey="racer"
                       className="fill-background"
+                      fill="black"
                       stroke="black"
                       fontSize={14}
                       formatter={(value: keyof typeof chartConfig) => {
