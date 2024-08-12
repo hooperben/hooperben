@@ -1,50 +1,50 @@
 [
   {
-    "Player": "Donkey Kong",
-    "Score": 240
+    "player": "Donkey Kong",
+    "score": 240
   },
   {
-    "Player": "White Shy Guy",
-    "Score": 219
+    "player": "White Shy Guy",
+    "score": 219
   },
   {
-    "Player": "Petey Piranha",
-    "Score": 150
+    "player": "Petey Piranha",
+    "score": 150
   },
   {
-    "Player": "Luigi",
-    "Score": 149
+    "player": "Luigi",
+    "score": 149
   },
   {
-    "Player": "Waluigi",
-    "Score": 147
+    "player": "Waluigi",
+    "score": 147
   },
   {
-    "Player": "Bowser Jr.",
-    "Score": 136
+    "player": "Bowser Jr.",
+    "score": 136
   },
   {
-    "Player": "Tanooki Mario",
-    "Score": 136
+    "player": "Tanooki Mario",
+    "score": 136
   },
   {
-    "Player": "Larry",
-    "Score": 91
+    "player": "Larry",
+    "score": 91
   },
   {
-    "Player": "Diddy Kong",
-    "Score": 82
+    "player": "Diddy Kong",
+    "score": 82
   },
   {
-    "Player": "Inkling Boy",
-    "Score": 71
+    "player": "Inkling Boy",
+    "score": 71
   },
   {
-    "Player": "Morton",
-    "Score": 74
+    "player": "Morton",
+    "score": 74
   },
   {
-    "Player": "Wendy",
-    "Score": 55
+    "player": "Wendy",
+    "score": 55
   }
 ]
