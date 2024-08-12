@@ -733,6 +733,29 @@ const firstHalfChartConfig = {
   Kamek: { label: "Kamek", color: "#000" },
 } satisfies ChartConfig;
 
+const renderLegend = (props) => {
+  const { payload } = props;
+
+  if (!payload) return null;
+
+  const all = payload.slice(0, 12);
+
+  return (
+    <>
+      {all.map((entry, index) => (
+        <div
+          key={`item-${index}`}
+          style={{
+            color: firstHalfChartConfig[entry.value].color,
+          }}
+        >
+          {entry.value}
+        </div>
+      ))}
+    </>
+  );
+};
+
 const FirstHalfChart = () => {
   return (
     <Card>
@@ -752,6 +775,7 @@ const FirstHalfChart = () => {
               tickLine={false}
               axisLine={false}
               tickMargin={2}
+              allowDuplicatedCategory={false}
             />
 
             <YAxis
@@ -760,6 +784,8 @@ const FirstHalfChart = () => {
               axisLine={false}
               tickMargin={2}
             />
+
+            {/* <Legend content={renderLegend} /> */}
 
             {firstHalfChartData.flatMap((chartItem) =>
               Object.keys(chartItem).map((key) => {

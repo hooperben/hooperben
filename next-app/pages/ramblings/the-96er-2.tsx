@@ -538,6 +538,8 @@ const markdown = [
   an event where we race all 96 maps available in mario kart 8 (48 standard + 48 DLC tracks).
 
   This year we had 4 participants, Gabba, Sweeney, Noah and myself.
+
+  **Race Set Up**: 2 x 48 race multiplayer grand prix with Tracks in order. 200cc, Frantic Items, Hard CPU (the Mob).
   
   The results were as follows:
   `,
@@ -675,8 +677,10 @@ const markdown = [
   ]
   \`\`\`\`
 
-  And, that's how I got the above line graphs.
-  
+  And, that's how I got the above line graphs. I only budgeted 4 hours to this whole analysis and am already sick of looking at
+  mario related data, so I'll leave it at that.
+
+  See you next time.
   `,
 ];
 
