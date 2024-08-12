@@ -6,6 +6,7 @@ import Markdown from "react-markdown";
 import rehypeKatex from "rehype-katex";
 import remarkMath from "remark-math";
 import Layout from "../../components/Layout";
+import Image from "next/image";
 import {
   Table,
   TableBody,
@@ -18,6 +19,7 @@ import { LabelList, Pie, PieChart } from "recharts";
 import {
   Card,
   CardContent,
+  CardDescription,
   CardHeader,
   CardTitle,
 } from "../../@/components/ui/card";
@@ -530,7 +532,7 @@ const results = [
 
 const markdown = [
   `
-  ## The 96er part 2
+  # The 2nd 96er (2024)
   
   If you're reading this, it means that we've successfully completed a 2nd 96er,
   an event where we race all 96 maps available in mario kart 8 (48 standard + 48 DLC tracks).
@@ -540,6 +542,9 @@ const markdown = [
   The results were as follows:
   `,
   `
+  Until Nintendo adds a 96 race grand prix, we are kind of stuck with this 2 x 48 analysis format, because as you may have noticed,
+  drivers between the first and second 48 change. I completely understand why they haven't added this 96 race format, as this whole
+  premise is kind of absurd.
 
   ### Data Retrieving Methodology
 
@@ -549,11 +554,11 @@ const markdown = [
   From here, I was able to over engineer a solution to get the data from the photos into a format that I could analyse.
 
   First, I did have to go through and manually name each of the 94 images I took with something resembling their track name. This took me about
-  half an hour and wasn't really necessary, but it makes the input data a bit nicer so thats something.
+  half an hour and turns out it wasn't really necessary, but it makes the input data a bit nicer so thats something.
 
   Now that I had all of my 'TRACK_NAME.HEIC' image files:
 
- ![heic-files](/2nd-96er/heic-files.png)
+  ![heic-files](/2nd-96er/heic-files.png)
 
   It's time to send it to GPT to ask it to rip out the information I need.
   Unfortunately, as I was about to learn, GPT does not allow for processing of HEIC images:
@@ -591,7 +596,7 @@ const markdown = [
   First, I need to write a script that takes all of the JSON files, and extracts the greatest score value. This will help me sort the input data into a *somewhat* chronological order,
   which will be easier to plot on an x axis.
 
-  But, here is where I hit another snag - as we did 2 x 48 races, I had 2 similar very score ranges. E.g, Mario Kart
+  But, here is where I hit another snag - as we did 2 x 48 races, I had 2 similar very score ranges. e.g, Mario Kart
   Stadium and Paris Promenade were the same values for max points score - and at the moment I didn't have a way to differentiate between which race was 
   in the first 48 and which was the 2nd.
 
@@ -627,7 +632,7 @@ const markdown = [
   - **RainbowRoad_NoLaps.png**  - the rainbow road where it's all continuous, no laps
   - **RainbowRoad.png**  - the first file I named so it just got called rainbow road
 
-  Once I factored this in, I was able to sort the race data I had from races 1-96, except the 2 I forgot to take photos of (we'll come back to that later):
+  Once I factored this in, I was able to sort the race data I had from races 1-96 (except the 2 I forgot):
 
   ![index-sorting-output](/2nd-96er/index-sorting-output.png)
 
@@ -675,6 +680,13 @@ const IndividualRamble = () => {
         />
       </Head>
       <div className="flex flex-col w-full">
+        <Image
+          src="/2nd-96er/thumbnail.png"
+          alt="The 2nd 96er"
+          width={500}
+          height={300}
+          className="w-full xs:w-3/4 md:w-3/4 max-w-lg pb-5"
+        />
         <div className="max-w-full w-full prose-p:text-[14px] prose dark:prose-invert text-black dark:text-darkCream dark:prose-strong:text-darkCream dark:prose-h1:text-darkCream dark:prose-h2:text-darkCream dark:prose-h3:text-darkCream dark:prose-h4:text-darkCream dark:prose-h5:text-darkCream dark:prose-h6:text-darkCream">
           <Markdown
             remarkPlugins={[remarkMath]}
@@ -714,8 +726,9 @@ const IndividualRamble = () => {
           </div>
 
           <Card className="flex flex-col">
-            <CardHeader className="items-center py-4">
-              <CardTitle>Win Distribution</CardTitle>
+            <CardHeader>
+              <CardTitle>Points Distribution - First Half</CardTitle>
+              <CardDescription>The total wins by each player</CardDescription>
             </CardHeader>
             <CardContent className="flex-1 pb-0">
               <ChartContainer
@@ -723,9 +736,6 @@ const IndividualRamble = () => {
                 className="mx-auto aspect-square max-h-[400px]"
               >
                 <PieChart>
-                  {/* <ChartTooltip
-                    content={<ChartTooltipContent nameKey="wins" hideLabel />}
-                  /> */}
                   <Pie data={chartData} dataKey="wins">
                     <LabelList
                       dataKey="racer"

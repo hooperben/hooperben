@@ -15,6 +15,13 @@ interface Rambling {
 
 const ramblings = [
   {
+    title: "The 2nd 96er",
+    date: "12-8-2024",
+    description: "We did a 96er again, but with a few more stats this time",
+    image: "/2nd-96er/thumbnail.png",
+    path: "/ramblings/the-96er-2",
+  },
+  {
     title: "The 96er",
     date: "16-12-2023",
     description:
@@ -48,10 +55,20 @@ const Card = ({ image, title, description, date, path }) => {
 
 const Ramblings = () => (
   <Layout title="ramblings | hooper.link">
-    <div className="prose dark:prose-invert text-black dark:text-darkCream dark:prose-strong:text-darkCream dark:prose-h1:text-darkCream dark:prose-h2:text-darkCream dark:prose-h3:text-darkCream dark:prose-h4:text-darkCream dark:prose-h5:text-darkCream dark:prose-h6:text-darkCream">
-      <Markdown>{markdown}</Markdown>
+    <div className="flex flex-col">
+      <div className="prose dark:prose-invert text-black dark:text-darkCream dark:prose-strong:text-darkCream dark:prose-h1:text-darkCream dark:prose-h2:text-darkCream dark:prose-h3:text-darkCream dark:prose-h4:text-darkCream dark:prose-h5:text-darkCream dark:prose-h6:text-darkCream">
+        <Markdown>{markdown}</Markdown>
+      </div>
 
-      <Card {...ramblings[0]} />
+      <div className="flex flex-wrap">
+        {ramblings.map((rambling, index) => (
+          <div key={index} className="max-w-full px-4 mb-4">
+            <div className="prose dark:prose-invert text-black dark:text-darkCream dark:prose-strong:text-darkCream dark:prose-h1:text-darkCream dark:prose-h2:text-darkCream dark:prose-h3:text-darkCream dark:prose-h4:text-darkCream dark:prose-h5:text-darkCream dark:prose-h6:text-darkCream">
+              <Card {...rambling} />
+            </div>
+          </div>
+        ))}
+      </div>
     </div>
   </Layout>
 );
