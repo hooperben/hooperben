@@ -750,7 +750,15 @@ const renderLegend = (props) => {
             marginRight: 2,
           }}
         >
-          {firstHalfChartConfig[entry.value].label},
+          {firstHalfChartConfig[entry.value].label}{" "}
+          {index === all.length - 1 ? (
+            ""
+          ) : (
+            <span style={{ color: "#000" }} color="#000">
+              {" "}
+              |{" "}
+            </span>
+          )}{" "}
         </span>
       ))}
     </div>
