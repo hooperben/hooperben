@@ -727,7 +727,7 @@ const IndividualRamble = () => {
 
           <Card className="flex flex-col">
             <CardHeader>
-              <CardTitle>Points Distribution - First Half</CardTitle>
+              <CardTitle>Wins Distribution</CardTitle>
               <CardDescription>The total wins by each player</CardDescription>
             </CardHeader>
             <CardContent className="flex-1 pb-0">
