@@ -775,5 +775,4 @@ const FirstHalfChart = () => {
     </Card>
   );
 };
-
 export default FirstHalfChart;

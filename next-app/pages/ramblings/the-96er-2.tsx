@@ -22,7 +22,8 @@ import {
   CardTitle,
 } from "../../@/components/ui/card";
 import { ChartConfig, ChartContainer } from "../../@/components/ui/chart";
-import FirstHalfChart from "../../components/charts";
+import FirstHalfChart from "../../components/charts/FirstHalfChart";
+import SecondHalfChart from "../../components/charts/SecondHalfChart";
 
 const chartData = [
   { racer: "Gabba", wins: 52, fill: "green" },
@@ -539,6 +540,9 @@ const markdown = [
   The results were as follows:
   `,
   `
+
+  ### Data Recording and Analysis
+
   This year, I wanted to see just what kind of data I could somewhat easily record and analyse from the 96er. 
 
   So, I thought that it would be a good start to take a photo of the scoreboard after every race (except the 2 I forgot, Cheep Cheep beach and Daisy Cruiser).
@@ -746,6 +750,8 @@ const IndividualRamble = () => {
           </Card>
 
           <FirstHalfChart />
+
+          <SecondHalfChart />
 
           <Markdown remarkPlugins={[remarkMath]} rehypePlugins={[rehypeKatex]}>
             {markdown[1]}
