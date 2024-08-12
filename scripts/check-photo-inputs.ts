@@ -1,18 +1,23 @@
 import fs from "fs";
 
 async function main() {
-  const folderPath = "../2nd-96er-data/96er/";
+  const folderPath = "../2nd-96er-data/96er/pngs/";
 
   const files = fs.readdirSync(folderPath);
 
-  let count = 0;
+  let fileCount = 0;
 
   for (const file of files) {
     if (!file.includes("IMG")) {
-      count++;
+      fileCount++;
     }
   }
-  console.log(count);
+  console.log(fileCount);
+
+  const jsonPath = "../2nd-96er-data/96er/json/";
+  const jsonFiles = fs.readdirSync(jsonPath);
+
+  console.log("json files: ", jsonFiles.length);
 }
 
 main().catch((err) => {
