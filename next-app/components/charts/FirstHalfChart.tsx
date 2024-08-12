@@ -754,10 +754,7 @@ const renderLegend = (props) => {
           {index === all.length - 1 ? (
             ""
           ) : (
-            <span style={{ color: "#000" }} color="#000">
-              {" "}
-              |{" "}
-            </span>
+            <span style={{ color: "#000" }}> | </span>
           )}{" "}
         </span>
       ))}
