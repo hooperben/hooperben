@@ -1,0 +1,50 @@
+[
+  {
+    "player": "Donkey Kong",
+    "score": 15
+  },
+  {
+    "player": "Black Shy Guy",
+    "score": 12
+  },
+  {
+    "player": "Bowser",
+    "score": 10
+  },
+  {
+    "player": "Toadette",
+    "score": 9
+  },
+  {
+    "player": "Baby Daisy",
+    "score": 8
+  },
+  {
+    "player": "Waluigi",
+    "score": 7
+  },
+  {
+    "player": "Luigi",
+    "score": 6
+  },
+  {
+    "player": "Pink Gold Peach",
+    "score": 5
+  },
+  {
+    "player": "Tanooki Mario",
+    "score": 4
+  },
+  {
+    "player": "King Boo",
+    "score": 3
+  },
+  {
+    "player": "Link",
+    "score": 2
+  },
+  {
+    "player": "Kamek",
+    "score": 1
+  }
+]
