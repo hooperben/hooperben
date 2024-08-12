@@ -541,7 +541,7 @@ const markdown = [
   `,
   `
 
-  ### Data Recording and Analysis
+  ### Data Retrieving Methodology
 
   This year, I wanted to see just what kind of data I could somewhat easily record and analyse from the 96er. 
 

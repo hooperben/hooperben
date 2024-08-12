@@ -1,6 +1,6 @@
 "use client";
 
-import { CartesianGrid, Line, LineChart, XAxis } from "recharts";
+import { CartesianGrid, Line, LineChart, XAxis, YAxis } from "recharts";
 
 import {
   Card,
@@ -749,6 +749,13 @@ const FirstHalfChart = () => {
             <CartesianGrid vertical={false} />
             <XAxis
               dataKey="track"
+              tickLine={false}
+              axisLine={false}
+              tickMargin={2}
+            />
+
+            <YAxis
+              dataKey="Donkey Kong"
               tickLine={false}
               axisLine={false}
               tickMargin={2}
