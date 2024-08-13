@@ -175,7 +175,15 @@ We raced all 96 races available in Mario Kart 8 - here are the results (they mig
 
 const IndividualRamble = () => {
   return (
-    <Layout title={`The 96er | hooper.link`}>
+    <Layout
+      title={`The 96er | hooper.link`}
+      shareable={{
+        title: "The 96er",
+        description: "my attempt at explaining ZK",
+        image: "https://hooper.link/the-96er.png",
+        url: "https://hooper.link/ramblings/the-96er",
+      }}
+    >
       <Head>
         {/* Title of the page */}
         <title>The 96er</title>
