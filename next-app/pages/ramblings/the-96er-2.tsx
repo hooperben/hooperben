@@ -686,7 +686,15 @@ const markdown = [
 
 const IndividualRamble = () => {
   return (
-    <Layout title={`The 2nd 96er | hooper.link`}>
+    <Layout
+      title={`The 2nd 96er | hooper.link`}
+      shareable={{
+        title: "The 2nd 96er",
+        description: "we raced all 96 mario kart 8 tracks (again)",
+        image: "https://hooper.link/2nd-96er/thumbnail.png",
+        url: "https://hooper.link/ramblings/the-96er-2",
+      }}
+    >
       <Head>
         {/* Title of the page */}
         <title>The 2nd 96er</title>
