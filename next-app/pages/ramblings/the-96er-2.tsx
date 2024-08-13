@@ -704,7 +704,7 @@ const IndividualRamble = () => {
         />
         <meta
           property="og:image"
-          content="https://hooper.link/the-96er-2.png"
+          content="https://hooper.link/2nd-96er/thumbnail.png"
         />
 
         {/* Twitter Card Meta Tags */}
@@ -721,7 +721,7 @@ const IndividualRamble = () => {
         />
         <meta
           name="twitter:image"
-          content="https://hooper.link/the-96er-2.png"
+          content="https://hooper.link/2nd-96er/thumbnail.png"
         />
       </Head>
       <div className="flex flex-col w-full">
