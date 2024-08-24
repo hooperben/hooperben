@@ -1,1 +1,1 @@
-its a bit of a grind
+trying to build circuits and mass
