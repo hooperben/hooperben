@@ -82,15 +82,15 @@ const Navigation = () => {
 
   // use effect to check if the user has dark mode on
   useEffect(() => {
-    if (window.matchMedia("(prefers-color-scheme: dark)").matches && darkMode) {
+    if (window.matchMedia("(prefers-color-scheme: dark)").matches || darkMode) {
       toggleDarkMode();
     }
   }, []);
 
   return (
     <div>
-      <nav className="bg-darkCream dark:bg-black shadow-darkShadow dark:shadow-lightShadow fixed w-full z-10 top-0 h-10">
-        <div className="max-w mx-auto px-4 mt-2">
+      <nav className="bg-darkCream dark:bg-black shadow-darkShadow dark:shadow-lightShadow fixed w-[102%] z-10 top-0 h-10">
+        <div className="max-w mx-auto px-8 mt-2">
           <div className="flex justify-between">
             {/* Desktop Menu */}
             <div className="hidden md:block">

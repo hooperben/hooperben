@@ -5,8 +5,9 @@ import Markdown from "react-markdown";
 import rehypeKatex from "rehype-katex";
 import remarkMath from "remark-math";
 import Layout from "../../components/Layout";
+import UTXO from "../../components/animations/utxo";
 
-const TITLE = "Private Unstoppable Money";
+const TITLE = "Roman Kyoto - Multi Asset Shield Pools Explained";
 const IMAGE = "/roman-kyoto/thumbnail.svg";
 const URL = "/ramblings/masp-explained";
 
@@ -16,11 +17,13 @@ const markdown = [
 
   In May this year, I competed in my first ETHGlobal Hackathon in Sydney where we created Roman Kyoto, a Multi Asset Shield Pool. The goal of this article is to explain what a Multi Asset Shield Pool is, how it works, and how you could be using one sooner than you'd think.
 
+  ## Some Context on Blockchains and Cryptocurrency
+
   At the moment, chances are that 99.9% of everything that you have seen to do with crypto or blockchains have occurred on public computer networks. Every dog shitcoin, every monkey profile picture, every time you've ordered illicit substances that you thought were anonymous - chances are that all details of these transactions are public for all to see.
 
-  Is this a feature? or is this a bug? Well, it does depend on the application, but for example, if everyone could see each others bank account balances and spending habits like this, I think this would be a much worse system than what we currently have. Blockchains and cryptocurrency need privacy enhancement tools, otherwise their real world applications are kind of inherently limited, especially versus what is now mainstream internet computing.
+  Is this a feature? or is this a bug? Well, it does depend on the application, but for example, if blockchains are meant to replace the existing internet as many crypto bros would have you believe, if everyone could see each others bank account balances and spending habits like this, I think this would be a much worse system than what we currently have. Blockchains and cryptocurrency need privacy enhancement tools, otherwise their real world applications are inherently limited, especially versus what is now mainstream internet computing.
 
-  At the time of writing, the stablecoin market (tokens that represent and are backed* by real world currency) currently sits at **~$170.01 Billion USD** [per DefiLlama](https://defillama.com/). 
+  Even with this public visibility, at the time of writing, the stablecoin market (tokens that represent and are backed* by real world currency) currently sits at **~$170.01 Billion USD** [per DefiLlama](https://defillama.com/). 
 
   *backed here is arguably subjective in aggregate, as it may include volatile, over-valued or over-leveraged protocols, but even factoring this in and rounding down to $150B, it is still a sizeable asset class, all deployed on public computer networks.
 
@@ -28,8 +31,55 @@ const markdown = [
 
   Defi has and will continue to steal volume from the traditional banking system as it evolves, but a lot of the current use cases of decentralised finance don't really appeal to the masses, and even if they did, the privacy conscious amongst us would be quick to highlight the lack of privacy on current blockchain networks, and return their money to banks where their information is a bit more hidden - which is very understandable.
 
-  But, what if we could have private balances of real assets, on a public computer network?
+  Interestingly, from my own observations in Australia I have seen a slight increase of people returning to using cash instead of cards for everyday payments, as banks have gotten greedier and continue to increase their fees to process (admittedly more convenient) digital payments.
+
+  But, what if we could have private balances of real assets, on a public computer network? That is, a peer to peer exchange of assets done electronically, completely privately (with reasonable mathematical certainty).
+
+  ## Private, Unstoppable Money
+
+  As blockchains and distributed systems have evolved, the programs that we can safely run on them have increased in both complexity and bandwidth, and new approaches to application development have allowed for more private applications to be built on top of these public networks.
+
+  The first private application built on top of Ethereum (the worlds biggest public computer) I remember hearing about was Tornado Cash.
+
+  Tornado Cash allows for users to deposit pre-determined amounts, e.g. units of 10, 100, 1000 etc into one big pot. Then, whenever the original depositor wants to, they can withdraw their deposited funds to a new address, without revealing any details about their original deposit. The protocol utilises Zero Knowledge proofs to keep details private - an incredibly exciting, emerging area of applied mathematics and cryptography.
+
+  In an ideal world, everyone would use an application like this for a bit of privacy enhancement and a bit more digital discretionary spending (just as they would cash), but unfortunately with any great power comes good and bad, and these same permissionless systems that increase privacy do exactly that for bad actors. It's estimated that 30% of all tornado cash deposits are tied to bad actors, [per chainalysis](https://www.chainalysis.com/blog/tornado-cash-sanctions-challenges/).
+
+  Despite the world having pieces of shit who abuse systems to hurt others, as a somewhat staunch libertarian/fence sitter, the perks of privacy enhancing technologies such as tornado cash, and more broadly the Zero Knowledge proofs that power them, represent what I believe to be the start of a privacy revolution in computing. I wanted to figure out how to program applications using Zero Knowledge proofs, and so further down the rabbit hole I went.
+
+  ## Roman Kyoto Team Formation
+
+  After I went to my first in person hackathon in Paris in 2023 for ZKLambdaWeek (run by [LambdaClass](https://x.com/class_lambda)), I quickly realised that hackathons were probably the best place to meet giga brains who better understood the moon-maths at play in ZK systems, so when ETHGlobal announced they were hosting an ETHGlobal hackathon in Sydney I was very keen.
+
+  After posting that I was looking to work on a ZK application I met my team mates Rudi, Ayad and Jack in the ETHGlobal discord and we started discussing what to build.
+
+  Rudi was very keen to build a MASP, a Multi Asset Shield Pool. A MASP allows users to have a single application where they can:
+
+  - Deposit any asset into a single application - in our case ERC20 tokens (USDC, wETH, wBTC, USDT, etc).
+  - **Privately** transfer whatever amount of whatever asset up to the balance that they have deposited, to whoever they want.
+  - Users can withdraw up to their balance of any given token from the application whenever they want
+
+  He sent through some resources to better explain how a system like this would work, but truthfully these articles may as well have been hieroglyphs, and I didn't think we'd actually be able to build it. Thankfully Rudi dumbed down a lot of the content and answered all my questions, so thanks to him the project was looking a lot more feasible by the time ETHGlobal kicked off.
+
+  ## Legal and Mathematical Disclaimer
+
+  Perhaps unnecessary - but before I explain how any of this works I'd like to preface by saying - **I will not, nor will I ever deploy a program like Roman Kyoto without a team of high calibre, probably overpaid lawyers giving me the thumbs up to do so.** This is merely a research exercise. It sucks to have to say this, but Tornado Cash and other privacy enhancing technology developers have been arrested and imprisoned for creating open source code bases that anyone can read and deploy. You can't restrict information, and prohibition does not work. These harsh sentences do nothing but further restrict each and every individuals right to privacy, rather than educate those on an emerging, promising technological development.
   
+  I'm confident there exists a non-dystopian future where we can have a legally compliant, completely private money transferral protocol, but until then, a lot of the pioneers of the field are forced to serve heavy sentences that are unjust.
+
+  Some of the maths here might also be incorrect - so if you see anything here or in the code base that is incorrect, please reach out.
+
+  ## The Roman Kyoto Protocol
+
+  The first thing to consider in the protocol is it's use of UTXO (Unspent Transaction Output) notes. The best way to explain this is to think of the following model:
+
+  Say I have 3 unique notes:
+
+  - 1 x $1.50 note
+  - 1 x $1.21 note
+  - 1 x $2.10 note
+
+  And I need to send Greg \\$2.31. In a UTXO model, I would use my \\$2.10 note, then my \\$1.21 note to get to at least \\$2.31 in notes, then request change from who I am sending my money to.
   `,
 ];
 
@@ -45,22 +95,20 @@ const IndividualRamble = () => {
       }}
     >
       <div className="flex flex-col w-full">
-        <Image
-          src={IMAGE}
-          alt="Roman Kyoto"
-          width={200}
-          height={300}
-          className="ml-[-100px] w-[700px]"
-        />
-        <div className="text-xs mt-[-20px] mb-[15px] italic">
+        <div className="align-left ml-[-30px]">
+          <Image src={IMAGE} alt="Roman Kyoto" width={700} height={500} />
+        </div>
+        <div className="text-xs mb-[15px] italic text-black dark:text-darkCream">
           Integers that some consider liberating, and that others consider
           dangerous, circa 2024.
         </div>
 
-        <div className="max-w-[600px] w-full prose-p:text-[14px] prose dark:prose-invert text-black dark:text-darkCream dark:prose-strong:text-darkCream dark:prose-h1:text-darkCream dark:prose-h2:text-darkCream dark:prose-h3:text-darkCream dark:prose-h4:text-darkCream dark:prose-h5:text-darkCream dark:prose-h6:text-darkCream">
+        <div className="max-w-[600px] w-full prose-p:text-[14px] prose-li:text-[14px] prose dark:prose-invert text-black dark:text-darkCream dark:prose-strong:text-darkCream dark:prose-h1:text-darkCream dark:prose-h2:text-darkCream dark:prose-h3:text-darkCream dark:prose-h4:text-darkCream dark:prose-h5:text-darkCream dark:prose-h6:text-darkCream dark:prose-li:text-darkCream">
           <Markdown remarkPlugins={[remarkMath]} rehypePlugins={[rehypeKatex]}>
             {markdown[0]}
           </Markdown>
+
+          <UTXO />
         </div>
       </div>
     </Layout>
