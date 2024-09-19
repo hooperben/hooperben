@@ -15,25 +15,26 @@ const markdown = [
   `
   # ${TITLE}
 
-  In May this year, I competed in my first ETHGlobal Hackathon in Sydney where we created Roman Kyoto, a Multi Asset Shield Pool. The goal of this article is to explain what a Multi Asset Shield Pool is, how it works, and how you could be using one sooner than you'd think.
+  In May this year, I competed in my first ETHGlobal Hackathon in Sydney where we created Roman Kyoto, a Multi Asset Shield Pool. The goal of this article is to explain what a Multi Asset Shield Pool is, how it works, and how you could be using one sooner than you'd think? perhaps
 
   ## Some Context on Blockchains and Cryptocurrency
 
-  At the moment, chances are that 99.9% of everything that you have seen to do with crypto or blockchains have occurred on public computer networks. Every dog shitcoin, every monkey profile picture, every time you've ordered illicit substances that you thought were anonymous - chances are that all details of these transactions are public for all to see.
+  At the moment, chances are that 99.9% of everything that you have seen to do with crypto or blockchains have occurred on public computer networks. Every dog based shitcoin, every monkey profile picture, every time you've ordered illicit substances that you thought were anonymous - chances are that all details of these transactions are public for all to see.
 
-  Is this a feature? or is this a bug? Well, it does depend on the application, but for example, if blockchains are meant to replace the existing internet as many crypto bros would have you believe, if everyone could see each others bank account balances and spending habits like this, I think this would be a much worse system than what we currently have. Blockchains and cryptocurrency need privacy enhancement tools, otherwise their real world applications are inherently limited, especially versus what is now mainstream internet computing.
+  Is this a feature? or is this a bug? Well, something being public being good or bad does depend on the application, but for example, if blockchains are meant to replace the existing internet as many crypto bros would have you believe, if everyone could see each others bank account balances and spending habits like this, I think this would be a much worse system than what we currently have. 
+  `,
+  `
+  The above transaction is from when I purchased a ticket to ETHPragma on ETH mainnet. **This transaction is public, and there forever.** Blockchains and cryptocurrencies need privacy enhancement tools, otherwise their real world applications are inherently limited, especially versus what is now mainstream internet computing.
 
-  Even with this public visibility, at the time of writing, the stablecoin market (tokens that represent and are backed* by real world currency) currently sits at **~$170.01 Billion USD** [per DefiLlama](https://defillama.com/). 
-
-  *backed here is arguably subjective in aggregate, as it may include volatile, over-valued or over-leveraged protocols, but even factoring this in and rounding down to $150B, it is still a sizeable asset class, all deployed on public computer networks.
+  Even with this public visibility feature/bug, at the time of writing, the stablecoin market (tokens that represent and are _backed_ by real world currency) currently sits at **~\\$170.01 Billion USD** [per DefiLlama](https://defillama.com/). 'Backed' here is arguably subjective in aggregate, as it may include volatile, over-valued or over-leveraged protocols, but even factoring this in and rounding down to $150B, it is still a sizeable asset class, all deployed on public computer networks.
 
   This volume of value has given birth to a new era of decentralised finance (defi for short). Where in the current banking system you have to pay the banker/middleman for their services (and they often jip you), defi aims to level the playing field, where finance can return to more of a peer to peer model, versus being controlled by monolith firms that are too big to fail, until they aren't.
 
   Defi has and will continue to steal volume from the traditional banking system as it evolves, but a lot of the current use cases of decentralised finance don't really appeal to the masses, and even if they did, the privacy conscious amongst us would be quick to highlight the lack of privacy on current blockchain networks, and return their money to banks where their information is a bit more hidden - which is very understandable.
 
-  Interestingly, from my own observations in Australia I have seen a slight increase of people returning to using cash instead of cards for everyday payments, as banks have gotten greedier and continue to increase their fees to process (admittedly more convenient) digital payments.
+  From my own observations in Australia I have seen a slight increase of people returning to using cash instead of cards for everyday payments, as banks have gotten greedier and continue to increase their fees to process (admittedly more convenient) digital payments.
 
-  But, what if we could have private balances of real assets, on a public computer network? That is, a peer to peer exchange of assets done electronically, completely privately (with reasonable mathematical certainty).
+  But, what if we could have our cake and eat it too? What if we could still have private money as conveniently as we have card or NFC payments? That is to formally propose, a peer to peer exchange of money done electronically, completely privately.
 
   ## Private, Unstoppable Money
 
@@ -45,15 +46,15 @@ const markdown = [
 
   In an ideal world, everyone would use an application like this for a bit of privacy enhancement and a bit more digital discretionary spending (just as they would cash), but unfortunately with any great power comes good and bad, and these same permissionless systems that increase privacy do exactly that for bad actors. It's estimated that 30% of all tornado cash deposits are tied to bad actors, [per chainalysis](https://www.chainalysis.com/blog/tornado-cash-sanctions-challenges/).
 
-  Despite the world having pieces of shit who abuse systems to hurt others, as a somewhat staunch libertarian/fence sitter, the perks of privacy enhancing technologies such as tornado cash, and more broadly the Zero Knowledge proofs that power them, represent what I believe to be the start of a privacy revolution in computing. I wanted to figure out how to program applications using Zero Knowledge proofs, and so further down the rabbit hole I went.
+  Despite the world having pieces of shit who abuse systems to or in the process of hurting others, as a somewhat staunch libertarian/fence sitter, the perks of privacy enhancing technologies such as tornado cash, and more broadly the Zero Knowledge proofs that power them, represent what I believe to be the start of a privacy revolution in computing. As soon as I learnt about Zero Knowledge proofs, I wanted to figure out how to program them, and so further down the rabbit hole I went.
 
   ## Roman Kyoto Team Formation
 
-  After I went to my first in person hackathon in Paris in 2023 for ZKLambdaWeek (run by [LambdaClass](https://x.com/class_lambda)), I quickly realised that hackathons were probably the best place to meet giga brains who better understood the moon-maths at play in ZK systems, so when ETHGlobal announced they were hosting an ETHGlobal hackathon in Sydney I was very keen.
+  After I went to my first in person hackathon in Paris in 2023 for ZKLambdaWeek (an awesome event run by [LambdaClass](https://x.com/class_lambda)), I quickly realised that hackathons were probably the best place to meet giga brains who better understood the moon-maths at play in ZK systems, so when ETHGlobal announced they were hosting an ETHGlobal hackathon in Sydney I was very keen.
 
   After posting that I was looking to work on a ZK application I met my team mates Rudi, Ayad and Jack in the ETHGlobal discord and we started discussing what to build.
 
-  Rudi was very keen to build a MASP, a Multi Asset Shield Pool. A MASP allows users to have a single application where they can:
+  Rudi was very keen to build a MASP, a Multi Asset Shield Pool. From a high level, a MASP allows users to have a single application where they can:
 
   - Deposit any asset into a single application - in our case ERC20 tokens (USDC, wETH, wBTC, USDT, etc).
   - **Privately** transfer whatever amount of whatever asset up to the balance that they have deposited, to whoever they want.
@@ -63,7 +64,7 @@ const markdown = [
 
   ## Legal and Mathematical Disclaimer
 
-  Perhaps unnecessary - but before I explain how any of this works I'd like to preface by saying - **I will not, nor will I ever deploy a program like Roman Kyoto without a team of high calibre, probably overpaid lawyers giving me the thumbs up to do so.** This is merely a research exercise. It sucks to have to say this, but Tornado Cash and other privacy enhancing technology developers have been arrested and imprisoned for creating open source code bases that anyone can read and deploy. You can't restrict information, and prohibition does not work. These harsh sentences do nothing but further restrict each and every individuals right to privacy, rather than educate those on an emerging, promising technological development.
+  Perhaps unnecessary - but before I explain how any of this works I'd like to preface by saying - **I will not, nor will I ever deploy a program like Roman Kyoto without a team of high calibre, probably overpaid lawyers giving me the thumbs up to do so.** This is merely a research exercise. It sucks to have to say this, but Tornado Cash and other privacy enhancing application developers have been arrested and imprisoned for creating open source code bases that anyone can read and deploy. You can't restrict information, and prohibition does not work. These harsh sentences don't do much except further restrict each and every individuals right to privacy, rather than educate those on an emerging, promising technological development.
   
   I'm confident there exists a non-dystopian future where we can have a legally compliant, completely private money transferral protocol, but until then, a lot of the pioneers of the field are forced to serve heavy sentences that are unjust.
 
@@ -75,11 +76,29 @@ const markdown = [
 
   Say I have 3 unique notes:
 
-  - 1 x $1.50 note
-  - 1 x $1.21 note
-  - 1 x $2.10 note
+  - 1 x $150 note
+  - 1 x $121 note
+  - 1 x $210 note
 
-  And I need to send Greg \\$2.31. In a UTXO model, I would use my \\$2.10 note, then my \\$1.21 note to get to at least \\$2.31 in notes, then request change from who I am sending my money to.
+  And I need to send my mate Greg \\$231. In a UTXO model, I would use my \\$210 note and my \\$121 note to get to at least \\$231, then request change from who I am sending my money to.
+
+  So to summarise, the inputs of this transaction are:
+
+  - 1 x \\$210 note
+  - 1 x \\$121 note
+
+  and the outputs are:
+
+  - 1 x \\$231 note (now owned by Greg)
+  - 1 x \\$100 note (owned by me)
+
+  The most important property to take note of in this example is that **the sum of the value of the inputs is always equal to the sum of the value of the outputs.**
+
+  Now, lets scale up our example. Say that it's not just Greg and I who have notes in this currency, but millions of others too. So long as the creation and deletion of new value into the system is specified and agreed upon, this amount never changes.
+
+  ## TO SORT
+
+  Rudi also has [an awesome write up about MASPS too](https://theblockhacker.substack.com/p/roman-kyoto-protocol-in-depth), go give that a read.
   `,
 ];
 
@@ -108,7 +127,16 @@ const IndividualRamble = () => {
             {markdown[0]}
           </Markdown>
 
-          <UTXO />
+          <Image
+            src="/roman-kyoto/purchase.png"
+            alt="public purchase"
+            width={700}
+            height={200}
+          />
+
+          <Markdown remarkPlugins={[remarkMath]} rehypePlugins={[rehypeKatex]}>
+            {markdown[1]}
+          </Markdown>
         </div>
       </div>
     </Layout>
