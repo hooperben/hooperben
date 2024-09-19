@@ -96,6 +96,10 @@ const markdown = [
 
   Now, lets scale up our example. Say that it's not just Greg and I who have notes in this currency, but millions of others too. So long as the creation and deletion of new value into the system is specified and agreed upon, this amount never changes.
 
+  We could represent all of the notes in our system like so:
+
+  And lets call this state an 'inventory version'. At inventory version 10 I might have 3 notes that sum to $141, and at inventory version 3000 I might have 8 notes that sum to $91.
+
   ## TO SORT
 
   Rudi also has [an awesome write up about MASPS too](https://theblockhacker.substack.com/p/roman-kyoto-protocol-in-depth), go give that a read.
