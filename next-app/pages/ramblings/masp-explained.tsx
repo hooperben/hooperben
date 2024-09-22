@@ -6,6 +6,7 @@ import rehypeKatex from "rehype-katex";
 import remarkMath from "remark-math";
 import Layout from "../../components/Layout";
 import UTXO from "../../components/animations/utxo";
+import Notes, { SpentNotes } from "../../components/animations/notes";
 
 const TITLE = "Roman Kyoto - Multi Asset Shield Pools Explained";
 const IMAGE = "/roman-kyoto/thumbnail.svg";
@@ -28,11 +29,11 @@ const markdown = [
 
   Even with this public visibility feature/bug, at the time of writing, the stablecoin market (tokens that represent and are _backed_ by real world currency) currently sits at **~\\$170.01 Billion USD** [per DefiLlama](https://defillama.com/). 'Backed' here is arguably subjective in aggregate, as it may include volatile, over-valued or over-leveraged protocols, but even factoring this in and rounding down to $150B, it is still a sizeable asset class, all deployed on public computer networks.
 
-  This volume of value has given birth to a new era of decentralised finance (defi for short). Where in the current banking system you have to pay the banker/middleman for their services (and they often jip you), defi aims to level the playing field, where finance can return to more of a peer to peer model, versus being controlled by monolith firms that are too big to fail, until they aren't.
+  This volume of value has given birth to a new era of decentralised finance (defi). Where in the current banking system you have to pay the banker/middleman for their services (where they often jip you), defi aims to level the playing field, where finance can return to more of a peer to peer model, versus being controlled by monolith firms that are too big to fail, until they aren't.
 
-  Defi has and will continue to steal volume from the traditional banking system as it evolves, but a lot of the current use cases of decentralised finance don't really appeal to the masses, and even if they did, the privacy conscious amongst us would be quick to highlight the lack of privacy on current blockchain networks, and return their money to banks where their information is a bit more hidden - which is very understandable.
+  Defi has and will continue to steal volume from the traditional banking system as it evolves, but a lot of the current use cases of decentralised finance don't really appeal to the masses, and even if they did, most would be quick to highlight the lack of privacy on current blockchains, and return their money to banks where their information is a bit more hidden - which is very understandable.
 
-  From my own observations in Australia I have seen a slight increase of people returning to using cash instead of cards for everyday payments, as banks have gotten greedier and continue to increase their fees to process (admittedly more convenient) digital payments.
+  But, from my own observations in Australia I have seen an increase of people returning to using cash instead of NFC payments for everyday discretionary spending, as banks have gotten greedier and continue to increase their fees to process (admittedly more convenient) digital payments.
 
   But, what if we could have our cake and eat it too? What if we could still have private money as conveniently as we have card or NFC payments? That is to formally propose, a peer to peer exchange of money done electronically, completely privately.
 
@@ -62,13 +63,13 @@ const markdown = [
 
   He sent through some resources to better explain how a system like this would work, but truthfully these articles may as well have been hieroglyphs, and I didn't think we'd actually be able to build it. Thankfully Rudi dumbed down a lot of the content and answered all my questions, so thanks to him the project was looking a lot more feasible by the time ETHGlobal kicked off.
 
-  ## Legal and Mathematical Disclaimer
+  ## Quick Legal and Mathematical Disclaimer
 
-  Perhaps unnecessary - but before I explain how any of this works I'd like to preface by saying - **I will not, nor will I ever deploy a program like Roman Kyoto without a team of high calibre, probably overpaid lawyers giving me the thumbs up to do so.** This is merely a research exercise. It sucks to have to say this, but Tornado Cash and other privacy enhancing application developers have been arrested and imprisoned for creating open source code bases that anyone can read and deploy. You can't restrict information, and prohibition does not work. These harsh sentences don't do much except further restrict each and every individuals right to privacy, rather than educate those on an emerging, promising technological development.
+  Probably unnecessary - but before I explain how any of this works I'd like to preface by saying - **I will not, nor will I ever deploy a program like Roman Kyoto without a team of high calibre, remarkably overpaid lawyers giving me a big thumbs up to do so.** This is merely a research exercise. It sucks to have to say this, but Tornado Cash and other privacy enhancing application developers have been arrested and imprisoned for creating open source code bases that anyone can read and deploy anyway. You can't restrict information, and prohibition does not work. These harsh sentences don't do anything except disrupt lives and further restrict each and every individuals right to digital privacy, rather than educate those on an emerging, promising technological development.
   
-  I'm confident there exists a non-dystopian future where we can have a legally compliant, completely private money transferral protocol, but until then, a lot of the pioneers of the field are forced to serve heavy sentences that are unjust.
+  I'm confident there exists a non-dystopian future where we can have a legally compliant, peer to peer completely private money transferral protocol, but until then, a lot of the pioneers of the field are forced to serve heavy sentences that are unjust.
 
-  Some of the maths here might also be incorrect - so if you see anything here or in the code base that is incorrect, please reach out.
+  A less political disclaimer, some of the maths here might also be incorrect - so if you see anything here or in the code base that is incorrect, please reach out.
 
   ## The Roman Kyoto Protocol
 
@@ -82,29 +83,45 @@ const markdown = [
 
   And I need to send my mate Greg \\$231. In a UTXO model, I would use my \\$210 note and my \\$121 note to get to at least \\$231, then request change from who I am sending my money to.
 
+  `,
+  `
+
   So to summarise, the inputs of this transaction are:
 
-  - 1 x \\$210 note
-  - 1 x \\$121 note
+  - 1 x \\$210 note (owned by me)
+  - 1 x \\$121 note (owned by me)
 
   and the outputs are:
 
-  - 1 x \\$231 note (now owned by Greg)
+  - 1 x \\$231 note (owned by Greg)
   - 1 x \\$100 note (owned by me)
 
-  The most important property to take note of in this example is that **the sum of the value of the inputs is always equal to the sum of the value of the outputs.**
+  The most important property to take note (haha) of in this example is that **the sum of the value of the inputs is always equal to the sum of the value of the outputs.**
 
-  Now, lets scale up our example. Say that it's not just Greg and I who have notes in this currency, but millions of others too. So long as the creation and deletion of new value into the system is specified and agreed upon, this amount never changes.
+  $$ Inputs = Outputs $$
+
+  $$ 210 + 121 = 231 + 100 $$
+
+  $$ 321 = 321 $$ 
+  
+  Now, lets scale up our example. Say that it's not just Greg and I who have notes in this currency, but a few others too. So long as the creation and deletion of new value into the system is specified and agreed upon, this amount never changes.
 
   We could represent all of the notes in our system like so:
-
-  And lets call this state an 'inventory version'. At inventory version 10 I might have 3 notes that sum to $141, and at inventory version 3000 I might have 8 notes that sum to $91.
-
-  ## TO SORT
-
-  Rudi also has [an awesome write up about MASPS too](https://theblockhacker.substack.com/p/roman-kyoto-protocol-in-depth), go give that a read.
   `,
+  `
+  And lets call this representation an 'inventory version'. The inventory, and thus the inventory version changes every single there is a transaction. So at inventory version 10 I might have 3 notes that sum to \\$141, and at inventory version 200, 201 and 202 I might have 8 notes that sum to \\$91.
+
+  New notes come into the system, and old notes leave, but the value always stays the same.
+
+  One of the cool features of this note system is that if I don't do any new transactions for a while - it doesn't really matter. I can use the latest inventory version just the same as 
+  `,
+
+  ``,
 ];
+
+// ## TO SORT
+
+// Rudi also has [an awesome write up about MASPS too](https://theblockhacker.substack.com/p/roman-kyoto-protocol-in-depth), go give that a read.
 
 const IndividualRamble = () => {
   return (
@@ -141,6 +158,24 @@ const IndividualRamble = () => {
           <Markdown remarkPlugins={[remarkMath]} rehypePlugins={[rehypeKatex]}>
             {markdown[1]}
           </Markdown>
+
+          <div className="m-w-[300px]">
+            <UTXO />
+          </div>
+
+          <Markdown remarkPlugins={[remarkMath]} rehypePlugins={[rehypeKatex]}>
+            {markdown[2]}
+          </Markdown>
+
+          <div className="m-w-[300px]">
+            <Notes />
+          </div>
+
+          <Markdown remarkPlugins={[remarkMath]} rehypePlugins={[rehypeKatex]}>
+            {markdown[3]}
+          </Markdown>
+
+          <SpentNotes />
         </div>
       </div>
     </Layout>
