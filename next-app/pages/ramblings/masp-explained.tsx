@@ -115,7 +115,24 @@ const markdown = [
   `
   New notes come into the system, and old notes are marked as spent, but the sum of all values always stays the same.
     
-  One of the cool features of this note system is that if I don't do any new transactions for a while - it doesn't really matter. I can use the latest inventory version just the same, as the place where my inventory is has not changed.
+  One of the cool property of this note system is that if I don't do any new transactions for a while - it doesn't really matter. I can use the latest inventory version just the same, as the place where my inventory is has not changed, as inventory is sorted by date of creation ascending. If someone sends me a note, I would use the inventory version where they create that new note, or any after.
+  
+  ## Making Note Transactions Private
+
+  Our note system above is cool, but all of it's variables are still public. If we did make these notes values private - how could we ever build a system where we can maintain our unbreakable rule of $$ inputs = outputs $$? i.e. how can we do calculations and evaluations on things that we cannot see? 
+  
+  One way of being able to do this using Homomorphic encryption. Homomorphic Encryption is a form of encryption that allows for computations to be performed on encrypted data, without having first to decrypt it. It's an incredibly cool, complicated, computationally expensive area of mathematics that uses elliptic curve addition (adding points together on a curve), but we can skip most of the lingo - just understand that it kind of works like a gibberish calculator. If you hit the same buttons in the same order, you'll get the same output.
+
+  If we change our value conservation formula to use homomorphic commitments rather than standard numbers - we can mask values of individual transactions, while still enforcing our invariant without knowing what value each transaction is.
+
+  The other secret sauce that we'll need to make transactions private is Zero Knowledge proofs. A zero knowledge proof is a way of proving something that is true, without revealing how you know it is true. Repeating myself a little here, but Zero Knowledge proofs are an incredibly cool, complicated, computationally expensive area of mathematics that uses different properties of polynomials to verify data inputs fit a specified criteria, without revealing the data itself.
+
+  The trick in making our note system private is to get these two technologies to work together, that is:
+
+  _If we can prove that our homomorphic commitment value note is within an inventory version without revealing any details about the note itself, we can privately spend our notes._
+
+  In order to do this, we have to make our model a little bit more complex.
+
   `,
 ];
 

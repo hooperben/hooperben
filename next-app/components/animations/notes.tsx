@@ -595,8 +595,8 @@ function SpentNotes() {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      width="524"
-      height="236"
+      width="400"
+      height="200"
       version="1"
       viewBox="0 0 770.88 353.25"
     >
