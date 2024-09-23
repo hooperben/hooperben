@@ -6,7 +6,7 @@ import rehypeKatex from "rehype-katex";
 import remarkMath from "remark-math";
 import Layout from "../../components/Layout";
 import UTXO from "../../components/animations/utxo";
-import Notes, { SpentNotes } from "../../components/animations/notes";
+import { Notes, SpentNotes } from "../../components/animations/notes";
 
 const TITLE = "Roman Kyoto - Multi Asset Shield Pools Explained";
 const IMAGE = "/roman-kyoto/thumbnail.svg";
@@ -110,13 +110,13 @@ const markdown = [
   `,
   `
   And lets call this representation an 'inventory version'. The inventory, and thus the inventory version changes every single there is a transaction. So at inventory version 10 I might have 3 notes that sum to \\$141, and at inventory version 200, 201 and 202 I might have 8 notes that sum to \\$91.
-
-  New notes come into the system, and old notes leave, but the value always stays the same.
-
-  One of the cool features of this note system is that if I don't do any new transactions for a while - it doesn't really matter. I can use the latest inventory version just the same as 
   `,
 
-  ``,
+  `
+  New notes come into the system, and old notes are marked as spent, but the sum of all values always stays the same.
+    
+  One of the cool features of this note system is that if I don't do any new transactions for a while - it doesn't really matter. I can use the latest inventory version just the same, as the place where my inventory is has not changed.
+  `,
 ];
 
 // ## TO SORT
@@ -176,6 +176,10 @@ const IndividualRamble = () => {
           </Markdown>
 
           <SpentNotes />
+
+          <Markdown remarkPlugins={[remarkMath]} rehypePlugins={[rehypeKatex]}>
+            {markdown[4]}
+          </Markdown>
         </div>
       </div>
     </Layout>
