@@ -115,7 +115,7 @@ const markdown = [
   `
   New notes come into the system, and old notes are marked as spent, but the sum of all values always stays the same.
     
-  One of the cool property of this note system is that if I don't do any new transactions for a while - it doesn't really matter. I can use the latest inventory version just the same, as the place where my inventory is has not changed, as inventory is sorted by date of creation ascending. If someone sends me a note, I would use the inventory version where they create that new note, or any after.
+  One cool property of this note system is that if I don't do any new transactions for a while - it doesn't really matter. I can use the latest inventory version just the same, as the place where my inventory is has not changed, as inventory is sorted by date of creation ascending. If someone sends me a note, I would use the inventory version where they create that new note, or any after.
   
   ## Making Note Transactions Private
 
