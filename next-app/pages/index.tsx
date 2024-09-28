@@ -2,7 +2,15 @@ import Link from "next/link";
 import Layout from "../components/Layout";
 
 const IndexPage = () => (
-  <Layout title="hooper.link">
+  <Layout
+    title="hooper.link"
+    shareable={{
+      title: "hooper.link",
+      description: "home page",
+      image: "/thumbnail.png",
+      url: "hooper.link",
+    }}
+  >
     <div className="text-black dark:text-darkCream">
       <div className="flex flex-col ">
         <h1 className="text-6xl font-bold">welcome</h1>

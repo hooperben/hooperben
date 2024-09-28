@@ -16,11 +16,13 @@ type Props = {
   title?: string;
   isContact?: boolean;
   shareable?: Shareable;
+  description?: string;
 };
 
 const Layout = ({
   children,
   title = "TODO add default title",
+  description,
   shareable,
   isContact,
 }: Props) => (
