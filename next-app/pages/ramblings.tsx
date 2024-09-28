@@ -1,10 +1,7 @@
 import Link from "next/link";
 import Layout from "../components/Layout";
 import Markdown from "react-markdown";
-
-const markdown = `
-  ## Ramblings
-`;
+import { title } from "process";
 
 interface Rambling {
   title: string;
@@ -14,6 +11,14 @@ interface Rambling {
 }
 
 const ramblings = [
+  // {
+  //   title: "TLS Notary",
+  //   date: "28-09-2024",
+  //   description:
+  //     "aka zkTLS, web proofs, DECO - whatever your local crytographer is calling it",
+  //   image: "tls-notary/mono.png",
+  //   path: "/ramblings/tls-notary",
+  // },
   {
     title: "The 2nd 96er",
     date: "12-8-2024",
@@ -33,20 +38,15 @@ const ramblings = [
 
 const Card = ({ image, title, description, date, path }) => {
   return (
-    <Link href={path} className="no-underline min-w-full">
+    <Link href={path} className="no-underline min-w-full max-w-full">
       <div className="max-w-sm rounded overflow-hidden shadow-xl">
         <div
-          style={{
-            backgroundImage: `url(${image})`,
-            backgroundSize: "cover",
-            backgroundPosition: "bottom",
-            height: "300px",
-            width: "100%",
-          }}
+          className="w-full h-52 md:h-80 bg-cover bg-top bg-no-repeat"
+          style={{ backgroundImage: `url(${image})` }}
         />
         <div className="px-6">
-          <h2 className="text-2xl mt-4">{title}</h2>
-          <p>{description}</p>
+          <h2 className="text-2xl my-2">{title}</h2>
+          <p className="text-sm">{description}</p>
         </div>
       </div>
     </Link>
@@ -56,8 +56,8 @@ const Card = ({ image, title, description, date, path }) => {
 const Ramblings = () => (
   <Layout title="ramblings | hooper.link">
     <div className="flex flex-col">
-      <div className="prose dark:prose-invert text-black dark:text-darkCream dark:prose-strong:text-darkCream dark:prose-h1:text-darkCream dark:prose-h2:text-darkCream dark:prose-h3:text-darkCream dark:prose-h4:text-darkCream dark:prose-h5:text-darkCream dark:prose-h6:text-darkCream">
-        <Markdown>{markdown}</Markdown>
+      <div className="ml-4 mb-2 prose dark:prose-invert text-black dark:text-darkCream dark:prose-strong:text-darkCream dark:prose-h1:text-darkCream dark:prose-h2:text-darkCream dark:prose-h3:text-darkCream dark:prose-h4:text-darkCream dark:prose-h5:text-darkCream dark:prose-h6:text-darkCream">
+        <Markdown>{`# Ramblings`}</Markdown>
       </div>
 
       <div className="flex flex-wrap">
