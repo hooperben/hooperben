@@ -44,6 +44,10 @@ const Layout = ({
         content={shareable ? shareable.title : "TODO fix title"}
       />
       <meta
+        property="description"
+        content={shareable ? shareable.description : "TODO fix description"}
+      />
+      <meta
         property="og:description"
         content={shareable ? shareable.description : "TODO fix description"}
       />
@@ -51,6 +55,7 @@ const Layout = ({
         property="og:image"
         content={shareable ? shareable.image : "TODO fix image"}
       />
+      <meta property="og:site_name" content={"hooper.link"} />
 
       {/* Twitter Card Meta Tags */}
       <meta name="twitter:card" content="summary_large_image" />
