@@ -13,7 +13,7 @@ const markdown = `
 
 ## Introduction 
 
-TLS Notary/DECO/Web Proofs/zkTLS/whatever crypto twitter wants to call it refers to the process of basically making all existing data on the internet (anywhere that starts with a \`https://\`, anyway) arbitrarily provable. This is a very interesting proposition, especially to the nerds trying to build public, permissionless, distributed computer systems that require data that is readily available on the old, centralised internet.
+TLS Notary/DECO/Web Proofs/zkTLS/whatever crypto twitter wants to call it refers to the process of basically making all existing data on the internet (anywhere that starts with a \`https://\`, anyway) verifiably provable. This is a very interesting proposition, especially to the nerds trying to build public, permissionless, distributed computer systems that require data that is readily available on the old, centralised internet.
 
 ## Helpful Context/Pre Reading
 
@@ -37,7 +37,7 @@ The protocol that powers this authentication process, HTTPS, is short for Hypert
 
 ## TLS
 
-We're a few hundred words into this explanation of TLS notary and I'm yet to even explain what TLS is. TLS is short for Transport Layer Security, and it's use is probably as ubiqitous as oxygens.
+TLS is short for Transport Layer Security, and it's use is probably as ubiqitous as oxygens.
 
 TLS is groundbreaking as it allows for 2 parties to securely exchange messages between each other, while relaying the messages publicly. Meaning that you could see Alice and Bob communicating using a TLS protocol and intercept one or all of their messages - but, assuming they're using modern algorithms, it is a mathematical certainty that you'll never be able to decrypt any message without getting more information from Alice or Bob (or consulting the NSA or a quantum computer).
 
@@ -74,7 +74,7 @@ I believe that points 2, 3 and 4 here are considerably easier than part 1. I don
 
 ### Selective Disclosure Design
 
-If we can get our TEE in deliverable 1 to convert data fields returned from the server request to a merkle tree representation (which is ideally configurable too) and sign this merkle root, we can pretty trivially write a noir circuit that proves:
+If we can get our TEE/MPC in deliverable 1 to convert data fields returned from the server request to a merkle tree representation (which is ideally configurable too) and sign this merkle root, we can pretty trivially write a noir circuit that proves:
 
 - As few or as many leaf node values in the merkle tree fit some criteria
 - The signature was done by a list of approved signers (this could be private or public).
@@ -263,8 +263,9 @@ _their end_ is where ever they want. This could be a smart contract or standard 
 
 ## Assumptions/Areas/Next Steps to Development
 
-- TEEs/MPC - this whole model has a large trust assumption build around the Notary being blind and trustable. This needs to be rock solid, and will require extensive investigation of what the current state of the art is, or perhaps comissioning/forking of an existing protocol soley to guarantee this is the case. I spoke with [David](https://x.com/davidlsneider) from [Lit Protocol](https://www.litprotocol.com/) the other day and he mentioned that a TEE Docker equivalent is within reach, so I am following that very closely.
-- The actual need to utilise TLS shared encryption/decryption key in the browser (if at all), versus just using auth headers saved as cookies in the browser.
+- TEEs/MPC - this whole model has a large trust assumption build around the Notary being blind and trustable. This needs to be rock solid, and will require extensive investigation of what the current state of the art is, or perhaps comissioning/forking of an existing protocol soley to guarantee this is the case. I spoke with [David](https://x.com/davidlsneider) from [Lit Protocol](https://www.litprotocol.com/) the other day and he mentioned that a TEE Docker image equivalent is within reach, so am investigating that sort of program now.
+- We mightn't need to merkle-ise the data attested to by the TLS Notary, but I think this might be a little more privacy enchancing?
+- The actual need to utilise TLS shared encryption/decryption key in the browser (if at all), versus just using auth headers saved as cookies in the browser.  This whole protocol was/is called TLS Notary, but the name is potentially a bit of a miss gnomer, if you will.
 - The nullifier logic here in the above example is probably incorrect and hackable (unless merkle tree creation/indexes is deterministic based on server response, but that's a bit of a cop out)
 
 If you made it this far thank you, this was quite a ramble 🫡  
@@ -282,7 +283,7 @@ const IndividualRamble = () => {
         url: `https://hooper.link${URL}`,
       }}
     >
-      <div className="max-w-[600px] w-full prose-p:text-[14px] prose-li:text-[14px] prose dark:prose-invert text-black dark:text-darkCream dark:prose-strong:text-darkCream dark:prose-h1:text-darkCream dark:prose-h2:text-darkCream dark:prose-h3:text-darkCream dark:prose-h4:text-darkCream dark:prose-h5:text-darkCream dark:prose-h6:text-darkCream dark:prose-li:text-darkCream dark:prose-li:marker:text-blue-300">
+      <div className="max-w-[600px] w-full prose-p:text-[14px] prose-li:text-[14px] prose dark:prose-invert text-black dark:text-darkCream dark:prose-strong:text-darkCream dark:prose-h1:text-darkCream dark:prose-h2:text-darkCream dark:prose-h3:text-darkCream dark:prose-h4:text-darkCream dark:prose-h5:text-darkCream dark:prose-h6:text-darkCream dark:prose-li:text-darkCream dark:prose-li:marker:text-blue-300 mb-[100px]">
         <Markdown remarkPlugins={[remarkMath]} rehypePlugins={[rehypeKatex]}>
           {markdown}
         </Markdown>
