@@ -278,8 +278,9 @@ const IndividualRamble = () => {
       title={`${TITLE} | hooper.link`}
       shareable={{
         title: TITLE,
-        description: "my attempt at explaining a multi asset shield pool",
-        image: `https://hooper.link${IMAGE}`,
+        description:
+          "what all the tlsn/zkTLS/webproofs/DECO fuss is about (and how I want to build one)",
+        image: `https://hooper.link/tls-notary/mono-cropped.png`,
         url: `https://hooper.link${URL}`,
       }}
     >
