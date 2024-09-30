@@ -11,14 +11,14 @@ interface Rambling {
 }
 
 const ramblings = [
-  // {
-  //   title: "TLS Notary",
-  //   date: "28-09-2024",
-  //   description:
-  //     "aka zkTLS, web proofs, DECO - whatever your local crytographer is calling it",
-  //   image: "tls-notary/mono.png",
-  //   path: "/ramblings/tls-notary",
-  // },
+  {
+    title: "TLS Notary",
+    date: "28-09-2024",
+    description:
+      "aka zkTLS, web proofs, DECO - whatever your local crytographer is calling it",
+    image: "tls-notary/mono.png",
+    path: "/ramblings/tls-notary",
+  },
   {
     title: "The 2nd 96er",
     date: "12-8-2024",
@@ -41,7 +41,7 @@ const Card = ({ image, title, description, date, path }) => {
     <Link href={path} className="no-underline min-w-full max-w-full">
       <div className="max-w-sm rounded overflow-hidden shadow-xl">
         <div
-          className="w-full h-52 md:h-80 bg-cover bg-top bg-no-repeat"
+          className="w-full h-[250px] bg-cover bg-top bg-no-repeat"
           style={{ backgroundImage: `url(${image})` }}
         />
         <div className="px-6">
