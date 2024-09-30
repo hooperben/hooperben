@@ -275,7 +275,7 @@ _Their end_ is where ever they want. This could be a smart contract or standard 
 
 ## Conclusion
 
-More and more of your life utilises web data through \`https://\`. TLS Notary is exciting as it allows you to make your data as portable and private as you'd like it to be. If you made it this far thank you, this was quite a ramble 🫡  
+More and more of your life utilises web data through \`https://\`. TLS Notary is exciting as it allows you to make your data as portable and private as you'd like it to be. If you made it this far thank you, this was quite a ramble. 
 
 P.S if you read this and want to work on this or are already working on it, swing me a message 🤙
 
@@ -293,7 +293,12 @@ const IndividualRamble = () => {
         url: `https://hooper.link${URL}`,
       }}
     >
-      <div className="max-w-[600px] w-full prose-p:text-[14px] prose-li:text-[14px] prose prose-code:before:hidden prose-code:after:hidden dark:prose-invert text-black dark:text-darkCream dark:prose-strong:text-darkCream dark:prose-h1:text-darkCream dark:prose-h2:text-darkCream dark:prose-h3:text-darkCream dark:prose-h4:text-darkCream dark:prose-h5:text-darkCream dark:prose-h6:text-darkCream dark:prose-li:text-darkCream dark:prose-li:marker:text-blue-300 mb-[100px]">
+      <div
+        className="max-w-[600px] w-full prose-p:text-[14px] prose-li:text-[14px] prose prose-code:before:hidden prose-code:after:hidden 
+        dark:prose-code:text-darkCream dark:prose-a:text-darkCream
+      prose-table:text-[14px] prose-tr:border-b-[1px] prose-td:border-b-[1px] prose-tr:border-solid prose-td:border-solid prose-table:border-black
+      dark:prose-invert text-black dark:text-darkCream dark:prose-th:text-darkCream dark:prose-strong:text-darkCream dark:prose-h1:text-darkCream dark:prose-h2:text-darkCream dark:prose-h3:text-darkCream dark:prose-h4:text-darkCream dark:prose-h5:text-darkCream dark:prose-h6:text-darkCream dark:prose-li:text-darkCream dark:prose-li:marker:text-blue-300 mb-[100px]"
+      >
         <Markdown
           remarkPlugins={[remarkMath, remarkGfm]}
           rehypePlugins={[rehypeKatex, rehypeHighlight]}
