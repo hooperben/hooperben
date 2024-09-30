@@ -14,7 +14,7 @@ const markdown = `
 
 ## Introduction 
 
-TLS Notary/DECO/Web Proofs/zkTLS/whatever crypto twitter wants to call it refers to the process of basically making all existing data on the internet (anywhere that starts with a \`https://\`, anyway) verifiably provable. This is a very interesting proposition, especially to the nerds trying to build public, permissionless, distributed computer systems that require data that is readily available on the old, centralised internet.
+TLS Notary/DECO/Web Proofs/zkTLS/whatever crypto twitter wants to call it refers to the process of basically making all existing data on the internet (anywhere that starts with a \`https://\`, anyway) provable. This is a very interesting proposition, especially to the nerds trying to build public, permissionless, distributed computer systems that require data that is readily available on the old, centralised internet.
 
 ## Helpful Context/Pre Reading
 
@@ -82,15 +82,15 @@ If we can get our TEE/MPC in deliverable 1 to convert data fields returned from 
 - As few or as many leaf node values in the merkle tree fit some criteria
 - The signature was done by a list of approved signers (this could be private or public).
 
-The following description is how I'm thinking that would work.
+## TLS Notary Minimum Viable Product Description
 
-## Minimum Viable Product Description Example
+The following description is how I'm thinking all of this could work in the context of an end to end example, demonstrating TLS Notaries data portability and programmable anonymity.
 
 Say I have an account on qantas.com, and everytime I login, I use the following details:
 
 \`\`\`
 email: 'ben@email.com'
-password: 'go_the_broncos_97'
+password: 'go_the_broncos_2024!'
 \`\`\`
 
 When I hit the login button, I can see in the console that it sends this \`email\` and \`password\` field to \`https://api.account.com/login\` in a HTTPS POST request. Because this is the correct password, I get a \`200\` response back from this request meaning that all went well, as well as a \`Bearer eyJh.super.realtoken\` which is saved as a cookie in my browser at location \`qantas_com_auth_token\`.
@@ -109,7 +109,7 @@ I then go to \`https://qantas.com/profile\` page, where I can see all of the det
 }
 \`\`\`
 
-I enjoy looking at my Qantas profile - it's a lovely airline. However, a competing airline, Satnaq has recently launched a new promotion where they'll match your qantas loyalty points in their system as a way to onboard more frequent flyers. Qantas has no interest in making this easier for Satnaq to do, so they're never going to make a server where Satnaq can get this information. This data is completely in qantas' control, even though they are meant to be my points.
+I enjoy looking at my Qantas profile - it's a lovely airline. However, a competing airline, Satnaq has recently launched a new promotion where they'll match your qantas loyalty points in their system as a way to onboard more frequent flyers. Qantas has no interest in making this easier for Satnaq to do, so they're never going to make a server where Satnaq can get this information. This data is completely in qantas' control, **even though they are meant to be my points**.
 
 However, Satnaq utilises pretty bleeding edge technology and says that if you can get a TLS Notary to attest to your \`loyalty_points\` in the response at \`https://api.qantas.com/profile\` request, they'll honour your points 1 to 1 in their system. They don't want any of your other information as they already get it through their systems, and that's probably a bad legal liability, yada yada, bereaucrats, etc.
 
@@ -181,7 +181,7 @@ In our example, this means:
 - **ZKP**: Zero Knowledge Proof
 - **SNARK**: Succinct Non-interactive Argument of Knowledge
 
-ZKPs/SNARKs allow you to generate computer programs that let you prove something is true, without revealing how you know it is true.
+ZKPs/SNARKs allow you to generate computer programs that let you prove something is true, without revealing how you know it is true. How this works is another blog post in itself, which should be coming soon, but that's all you need to know for now.
 
 Now that we have our data that has been formatted into a merkle tree representation and attested to by the TLS Notary - we generate a ZKP/SNARK to send to Satnaq to prove that we have:
 
@@ -251,33 +251,33 @@ fn main(
 
 Satnaq makes this circuit public, where I can download it, compile it, and generate a proof using the inputs I have returned from the TLS Notary response. A circuit like this and its proof generation is probably okay to be ran on a good computer - but if not, it could be generated in a dedicated, more powerful, TEE/MPC env (Deliverable 3 above).
 
-Either way, once I've generated my proof, I can now enter the following details on Satnaq's \`https://satnaq.com/points-match\` front end:
+Either way, once I've generated my proof, I can now enter the following details on Satnaq's \`https://satnaq.com/points-match\` website:
 
 | Input          | Value                          |
 | -------------- | ------------------------------ |
-| proof          | 95bf82a289b8...9780257722bc064 |
-| loyalty_points | '"loyalty_points": 1201411'    |
-| tls_pub_key    | 0xblindrobot                   |
-| nullifier      | 0x12412                        |
+| proof          | \`95bf82a289b8...9780257722bc064\` |
+| loyalty_points | \`'"loyalty_points": 1201411'\`    |
+| tls_pub_key    | \`0xblindrobot\`                   |
+| nullifier      | \`0x3F6..412\`                     |
 
-We don't need to send them the path (\`https://api.qantas.com/profile\`), as they know that already. They have all the inputs they need to re-run and reconstruct the proof.
+We don't need to give them the path (\`https://api.qantas.com/profile\`), as they know that already. They have all the inputs they need to re-run and reconstruct the proof.
 
-If this proof passes on their end, the nullifier is marked as used, and I get 1201411 Satnaq Points.
+If this proof passes on their end, the nullifier is marked as used, and I get 1201411 Satnaq Points. _Their end_ is where ever they want. This could be a smart contract or standard server that can run this ZKP/SNARK verification process. The most exciting part of TLS Notary is how portable it makes verifiable data, **it can be used anywhere.**
 
-_Their end_ is where ever they want. This could be a smart contract or standard server that can run this ZKP/SNARK verification process. The most exciting part of TLS Notary is how portable it makes verifiable data, **it can be used anywhere.**
+My Qantas ID is also kept completely private, so this proof could be done publicly and there would be no way to link it back to my user account.
 
 ## Assumptions/Hurdles to Development/Unknowns
 
-- TEEs/MPC - this whole model has a large trust assumption build around the Notary being blind and trustable. This needs to be rock solid, and will require extensive investigation of what the current state of the art is, or perhaps comissioning/forking of an existing protocol soley to guarantee this is the case. I spoke with [David](https://x.com/davidlsneider) from [Lit Protocol](https://www.litprotocol.com/) the other day and he mentioned that a TEE Docker image equivalent is within reach, so am investigating that sort of program now.
+- **TEEs/MPC** - this whole model obviously has a large trust assumption built around the Notary being blind and trustable. This will be achieved with Multi-Party Computation, which is currently quite slow and limited, but is maturing. I spoke with [David](https://x.com/davidlsneider) from [Lit Protocol](https://www.litprotocol.com/) the other day and he mentioned that a TEE Docker image equivalent is within reach, so am investigating that sort of program now.
 - We mightn't need to merkle tree-ise the data attested to by the TLS Notary, but I think this might be a little more privacy enchancing? 
-- The actual need to utilise TLS shared encryption/decryption key in the browser (if at all), versus just using auth headers saved as cookies in the browser.  This whole protocol was/is called TLS Notary, but the name is potentially a bit of a miss gnomer, if you will.
+- The actual need to utilise TLS shared encryption/decryption key in the browser (if at all), versus just using auth headers saved as cookies in the browser.  This whole protocol was/is called TLS Notary, but the name is potentially a bit of a Mrs. Gnomer, if you will.
 - The nullifier logic here in the above example is probably incorrect and hackable (unless merkle tree creation/indexes is deterministic based on server response, but that's a bit of a cop out)
 
 ## Conclusion
 
 More and more of your life utilises web data through \`https://\`. TLS Notary is exciting as it allows you to make your data as portable and private as you'd like it to be. If you made it this far thank you, this was quite a ramble. 
 
-P.S if you read this and want to work on this or are already working on it, swing me a message 🤙
+P.S if you read this and want to work on this or are already working on something similar, please swing me a message 🤙
 
 `;
 
