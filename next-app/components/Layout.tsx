@@ -82,7 +82,7 @@ const Layout = ({
 
     <div className="flex p-5 pt-20 md:p-20 md:pt-20">{children}</div>
 
-    <footer className="hidden md:block fixed bottom-5 right-5">
+    <footer className="hidden lg:block fixed bottom-5 right-5">
       <div className="flex justify-end bottom-0">
         {isContact && (
           <p className="text-black dark:text-darkCream">down here too! handy</p>
