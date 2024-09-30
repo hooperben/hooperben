@@ -1,8 +1,9 @@
-import rehypeKatex from "rehype-katex";
-import remarkMath from "remark-math";
-
-import Layout from "../../components/Layout";
 import Markdown from "react-markdown";
+import rehypeHighlight from "rehype-highlight";
+import rehypeKatex from "rehype-katex";
+import remarkGfm from "remark-gfm";
+import remarkMath from "remark-math";
+import Layout from "../../components/Layout";
 
 const TITLE = "TLS Notary TLDR";
 const IMAGE = "/tls-notary/mono.png";
@@ -22,7 +23,7 @@ You're probably familiar with what a client/server relationship is in web softwa
 - **the client**: is what normally looks pretty. Most commonly a website or an app, and is fundamentally quite dumb. It normally just takes data in, and sends that data off to server(s) to process, record and store.
 - **the server**: is what you don't normally see. It's where all data for a website or app is normally kept, and is only really truly accessible to whoever has the keys to the server.
 
-An interesting problem that client/server implementations have had to solve is 'how does a server know which client is which?' The short answer? Cryptography, the long answer, well...
+An interesting problem that client/server implementations have had to solve is _'how does a server know which client is which?'_ The short answer? Cryptography, the long answer, well...
 
 Over the years and computational revolutions, the client and server have taken different shapes and forms of doing this, but almost all have an authentication pattern in the form:
 
@@ -51,9 +52,9 @@ I don't want to ever besmirch Phil Merkles good name and his design of this incr
 
 All that TLS Notary does is add an attestation (notarises) that data exchanged between Alice and Bob either came from Alice, or came from Bob. Or more specifically using our client/server explanation above - it attests that a server has information about a given client.
 
-The complexity that arises in Notarising TLS data is making this notary blind to the data they are notarising. I can give anyone my youtube login details and they can login and see for themselves that I've been subscribed to Veratasium since before he had 100k subscribers - but I don't really want to really do that, as that's a horrible idea that does not scale well. But, I am somewhat proud of this and want to flex. How else can I verifiably prove that this is true?
+The complexity that arises in Notarising TLS data is making this notary blind to the data they are notarising. I can give anyone my youtube login details and they can login and see for themselves that I've been subscribed to Veratasium since before he had 100k subscribers - but I don't really want to really do that, as that's a horrible idea with regards to best security practices, and also doesn't scale well. But, I am somewhat proud of this and want to flex. How else can I verifiably prove that this is true?
 
-What if I could give my youtube authentication token to a near-blind, forgetful robot that's been programmed to hit a certain server, retrieve some data, hash it and sign it and then recreate a proof that that data contained a subscription origin date that predated the public record of when veratasiums youtube channel hit 100k subscribers?
+What if I could give my youtube authentication token to a near-blind, forgetful robot that's been programmed to hit a certain server with my credentials, retrieve some data and then sign it - then I can publicly say 'here's a proof that this information is correct, and TLS Notaries signature to prove it'.
 
 This convoluted example is a long winded way of saying, the notary needs to accept and recreate requests that the client would make to a given server, but do so with **absolute trust minimisation and information leakage**.
 
@@ -63,7 +64,7 @@ Thankfully, having blind notaries is becoming increasingly more feasible, and he
 
 I think to ship an industry leading TLS Notary Implementation with 2024 technology, it's going to require the following deliverables:
 
-1. TEE (Trusted Execution Environment)/MPC (Multi-Party Compute) equivalent that essentially accepts requests and instructions to recreate and attest to. This application would be written in rust - and ideally can only accept tasks to evaluate, and share the public key of the private key it has in it's memory.
+1. TEE (Trusted Execution Environment)/MPC (Multi-Party Compute) equivalent that essentially accepts requests and instructions to recreate and attest to (our blind, forgetful robot). This application would be written in rust - and ideally can only accept tasks to evaluate, and share the public key of the private key it has in it's memory.
 2. A [noir](https://noir-lang.org/) circuit to verify request data contents, and TEE message signature.
 3. Another TEE/MPC for noir verification key and proof generations - this is an optional addition, but abstracting compute load away from users and billing for it is probably the only way proofs are going to reach computational feasibility anytime soon. This would also be a good way to actually generate revenue too.
 4. A more intuitive/dumbed down front end or addition to the existing TLSNotary web extension to utilise the deployed TEEs + converting to noir provers.
@@ -74,6 +75,8 @@ I believe that points 2, 3 and 4 here are considerably easier than part 1. I don
 
 ### Selective Disclosure Design
 
+A promising use case of TLS Notary like systems is selective disclosure - meaning you can pick and choose what you want to reveal about what the TLS notary has signed for you. This can be done in a few ways.
+
 If we can get our TEE/MPC in deliverable 1 to convert data fields returned from the server request to a merkle tree representation (which is ideally configurable too) and sign this merkle root, we can pretty trivially write a noir circuit that proves:
 
 - As few or as many leaf node values in the merkle tree fit some criteria
@@ -81,9 +84,7 @@ If we can get our TEE/MPC in deliverable 1 to convert data fields returned from 
 
 The following description is how I'm thinking that would work.
 
-## Minimum Viable Product Description
-
-The following is a description of what a working example of the above might look like in action.
+## Minimum Viable Product Description Example
 
 Say I have an account on qantas.com, and everytime I login, I use the following details:
 
@@ -112,7 +113,7 @@ I enjoy looking at my Qantas profile - it's a lovely airline. However, a competi
 
 However, Satnaq utilises pretty bleeding edge technology and says that if you can get a TLS Notary to attest to your \`loyalty_points\` in the response at \`https://api.qantas.com/profile\` request, they'll honour your points 1 to 1 in their system. They don't want any of your other information as they already get it through their systems, and that's probably a bad legal liability, yada yada, bereaucrats, etc.
 
-I decide that I can let the execution environment running at \`https://tls-notary.com\` borrow my token and TLS shared key to recreate the request to \`https://api.qantas.com/profile\`. So, I send a HTTPS POST request to \`https://tls-notary.com/blind-robot\`, with the following details:
+I decide that I can let the execution environment running at \`https://tls-notary.com\` borrow my \`ACCOUNT_AUTH_HEADER\` token to recreate the request to \`https://api.qantas.com/profile\`. So, I send a HTTPS POST request to \`https://tls-notary.com/blind-robot\`, with the following details:
 
 \`\`\`
 {
@@ -191,7 +192,7 @@ In noir - this circuit would look something like:
 
 \`\`\`rust
 fn main(
-  tree: [Field; 16], // our tree array
+  tree: [Field; 16], // our tree
 
   loyalty_points: pub Field, // '"loyalty_points": 1201411' (public variable)
   points_index: Field, // the leaf index of the hashed loyalty points value
@@ -208,18 +209,19 @@ fn main(
 ) {
   // check our points index hash matches the expected leaf index
   assert(
-    tree[points_index] == std::hash::poseidon2::bn254::hash_1([loyalty_points]),
+    tree[points_index] == poseidon2([loyalty_points]),
     "invalid points hash"
   );
 
   // do the same with server path and nullifier
   assert(
-    tree[server_path_index] == std::hash::poseidon2::bn254::hash_1([server_path]),
+    tree[server_path_index] == poseidon2([server_path]),
     "invalid server"
   );
 
-  // next we reconstruct and check that our nullifier is valid (matches and is in the tree)
-  let reconstructed_nullifier = std::hash::poseidon2::bn254::hash_1([id]);
+  // next we reconstruct and check that our nullifier is valid 
+  // (matches and is in the tree)
+  let reconstructed_nullifier = poseidon2([id]);
   assert(
     reconstructed_nullifier == nullifier,
     "invalid public nullifier"
@@ -284,8 +286,11 @@ const IndividualRamble = () => {
         url: `https://hooper.link${URL}`,
       }}
     >
-      <div className="max-w-[600px] w-full prose-p:text-[14px] prose-li:text-[14px] prose dark:prose-invert text-black dark:text-darkCream dark:prose-strong:text-darkCream dark:prose-h1:text-darkCream dark:prose-h2:text-darkCream dark:prose-h3:text-darkCream dark:prose-h4:text-darkCream dark:prose-h5:text-darkCream dark:prose-h6:text-darkCream dark:prose-li:text-darkCream dark:prose-li:marker:text-blue-300 mb-[100px]">
-        <Markdown remarkPlugins={[remarkMath]} rehypePlugins={[rehypeKatex]}>
+      <div className="max-w-[600px] w-full prose-p:text-[14px] prose-li:text-[14px] prose prose-code:before:hidden prose-code:after:hidden dark:prose-invert text-black dark:text-darkCream dark:prose-strong:text-darkCream dark:prose-h1:text-darkCream dark:prose-h2:text-darkCream dark:prose-h3:text-darkCream dark:prose-h4:text-darkCream dark:prose-h5:text-darkCream dark:prose-h6:text-darkCream dark:prose-li:text-darkCream dark:prose-li:marker:text-blue-300 mb-[100px]">
+        <Markdown
+          remarkPlugins={[remarkMath, remarkGfm]}
+          rehypePlugins={[rehypeKatex, rehypeHighlight]}
+        >
           {markdown}
         </Markdown>
       </div>
