@@ -172,23 +172,25 @@ where:
 
 In our example, this means:
 
-- \`tree[0] == poseidon2('https://api.qantas.com/profile') == 0x12..412\`
-- \`tree[3] == poseidon2('"id": 12243324') === 0x00..001\`
-- \`tree[4] == poseidon2('"loyalty_points": 1201411') == 0x96..435\`
+- \`tree[0] = poseidon2('https://api.qantas.com/profile') = 0x12..412\`
+- \`tree[3] = poseidon2('"id": 12243324') = 0x00..001\`
+- \`tree[4] = poseidon2('"loyalty_points": 1201411') = 0x96..435\`
 
 ## ZKP/SNARKing Time
 
-- ZKP: Zero Knowledge Proof
-- SNARK: Succinct Non-interactive Argument of Knowledge
+- **ZKP**: Zero Knowledge Proof
+- **SNARK**: Succinct Non-interactive Argument of Knowledge
 
-Now that we have our data that has been formatted into a merkle tree representation and attested to by the TLS Notary - I need to generate a ZKP/SNARK to send to Satnaq to prove that we have:
+ZKPs/SNARKs allow you to generate computer programs that let you prove something is true, without revealing how you know it is true.
+
+Now that we have our data that has been formatted into a merkle tree representation and attested to by the TLS Notary - we generate a ZKP/SNARK to send to Satnaq to prove that we have:
 
 - a public leaf that contains a points value representation of \`'"loyalty_points": 1201411'\`
 - a public leaf that contains the retrieval path of \`https://api.qantas.com/profile\`
 - a private leaf that proves that our \`'"id": 12243324'\` leaf has not being used before (our nullifier)
 - when the tree is reconstructed, we can evaluate that the root of the tree when signed by the private key that corresponds to the public key \`signerPubKey\` and returned \`signature\` variable.
 
-In noir - this circuit would look something like:
+In noir, a ZKP/SNARK DSL (Domain Specific Language) - the circuit would look something like:
 
 \`\`\`rust
 fn main(
@@ -240,13 +242,14 @@ fn main(
     merkle_root
   );
 
-  // if it's a valid signature, we are done. If it's not, the proof is not valid and will throw an error.
+  // if it's a valid signature, we are done. 
+  // If it's not, the proof is not valid and will throw an error.
   assert(isValidSignature, "invalid sig!");
 }
 
 \`\`\`
 
-I can then get this noir circuit, compile it, and generate a proof using the inputs I have returned from the TLS Notary response. A circuit like this and its proof generation is probably okay to be ran on a good computer - but if not, it could be generated in a dedicated, more powerful, TEE/MPC env (Deliverable 3 above).
+Satnaq makes this circuit public, where I can download it, compile it, and generate a proof using the inputs I have returned from the TLS Notary response. A circuit like this and its proof generation is probably okay to be ran on a good computer - but if not, it could be generated in a dedicated, more powerful, TEE/MPC env (Deliverable 3 above).
 
 Either way, once I've generated my proof, I can now enter the following details on Satnaq's \`https://satnaq.com/points-match\` front end:
 
@@ -261,16 +264,20 @@ We don't need to send them the path (\`https://api.qantas.com/profile\`), as the
 
 If this proof passes on their end, the nullifier is marked as used, and I get 1201411 Satnaq Points.
 
-_their end_ is where ever they want. This could be a smart contract or standard server that can run this ZKP/SNARK verification process. The most exciting part of TLS Notary is how portable it makes verifiable data, **it can be used anywhere.**
+_Their end_ is where ever they want. This could be a smart contract or standard server that can run this ZKP/SNARK verification process. The most exciting part of TLS Notary is how portable it makes verifiable data, **it can be used anywhere.**
 
-## Assumptions/Areas/Next Steps to Development
+## Assumptions/Hurdles to Development/Unknowns
 
 - TEEs/MPC - this whole model has a large trust assumption build around the Notary being blind and trustable. This needs to be rock solid, and will require extensive investigation of what the current state of the art is, or perhaps comissioning/forking of an existing protocol soley to guarantee this is the case. I spoke with [David](https://x.com/davidlsneider) from [Lit Protocol](https://www.litprotocol.com/) the other day and he mentioned that a TEE Docker image equivalent is within reach, so am investigating that sort of program now.
-- We mightn't need to merkle-ise the data attested to by the TLS Notary, but I think this might be a little more privacy enchancing?
+- We mightn't need to merkle tree-ise the data attested to by the TLS Notary, but I think this might be a little more privacy enchancing? 
 - The actual need to utilise TLS shared encryption/decryption key in the browser (if at all), versus just using auth headers saved as cookies in the browser.  This whole protocol was/is called TLS Notary, but the name is potentially a bit of a miss gnomer, if you will.
 - The nullifier logic here in the above example is probably incorrect and hackable (unless merkle tree creation/indexes is deterministic based on server response, but that's a bit of a cop out)
 
-If you made it this far thank you, this was quite a ramble 🫡  
+## Conclusion
+
+More and more of your life utilises web data through \`https://\`. TLS Notary is exciting as it allows you to make your data as portable and private as you'd like it to be. If you made it this far thank you, this was quite a ramble 🫡  
+
+P.S if you read this and want to work on this or are already working on it, swing me a message 🤙
 
 `;
 
