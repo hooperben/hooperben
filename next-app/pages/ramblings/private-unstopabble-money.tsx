@@ -8,7 +8,7 @@ import Layout from "../../components/Layout";
 import UTXO from "../../components/animations/utxo";
 import { Notes, SpentNotes } from "../../components/animations/notes";
 
-const TITLE = "Private Unstoppable Money";
+const TITLE = "Private, Unstoppable Money";
 const IMAGE = "/roman-kyoto/thumbnail.svg";
 const URL = "/ramblings/private-unstoppable-money";
 
